@@ -24,6 +24,11 @@ class Tasks extends React.Component {
 
     console.log(this.props)
     const filteredTasks = filterTasks(this.props.data);
+
+    console.log(tasks);
+
+    const filteredTasks = filterTasks(tasks);
+
     const {todos, inProgress, completed} = filteredTasks;
 
     return (
@@ -37,3 +42,4 @@ class Tasks extends React.Component {
 }
 
 export default Tasks;
+

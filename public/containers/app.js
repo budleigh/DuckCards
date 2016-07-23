@@ -21,7 +21,6 @@ import * as Spacing from 'material-ui/styles/spacing';
 import Tasks from '../components/Tasks.js';
 import Navbar from '../components/Navbar.js';
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -65,6 +64,12 @@ class App extends Component {
         </div>
       </MuiThemeProvider>
     );
+        // <Navbar />
+
+        //passing in promise
+        <Tasks task={task} />
+
+    )
   }
 }
 
@@ -73,6 +78,7 @@ App.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   data: PropTypes.array.isRequired
 }
+
 
 const mapStateToProps = state => state
 
