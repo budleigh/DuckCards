@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var path = require('path');
 // var OAuthServer = require("express-oauth-server");
 var db = require('./db/db.js');
+var ObjectId = require('mongoose').Schema.ObjectId;
 
 var app = express();
 
@@ -39,8 +40,16 @@ app.get('/tasks', function(req, res) {
 //POSTS TASKS
 app.post('/tasks', function(req, res) {
 	var newTask = req.body;
-	
 	db.collection('tasks').insertOne(newTask, function(err, data) {
 		err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
 	});
+});
+
+
+app.post('/update', function(req, res) {
+  var updates = req.body.updates;
+  var title = req.body.title;
+  db.collection('tasks').update({ "title": title }, { $set: { updates }}, function(err, data) {
+    err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data)
+  });
 });

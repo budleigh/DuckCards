@@ -3,6 +3,7 @@ import axios from 'axios'
 export const REQUEST_TASKS = 'REQUEST_TASKS'
 export const RECEIVE_TASKS = 'RECIEVE_TASKS'
 export const POST_TASK = 'POST_TASK'
+export const UPDATE_TASK = 'UPDATE_TASK'
 
 
 export function requestTasks() {
@@ -50,6 +51,14 @@ export function fetchTasksIfNeeded() {
     if(shouldFetchTasks(getState())) {
       return dispatch(fetchTasks())
     }
+  }
+}
+
+export function updateTask(title, update) {
+  return dispatch => {
+    return axios.post('http://localhost:3000/update', { title: title, body: update })
+      .then( response => dispatch(fetchTasks() )
+      .catch( error => console.log(error) )
   }
 }
 
