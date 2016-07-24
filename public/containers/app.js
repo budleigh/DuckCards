@@ -1,118 +1,87 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { render } from 'react-dom';
-import { fetchTasks } from '../actions'
+
+import {
+  fetchTasks, receiveTasks,
+  fetchTasksIfNeeded, postTask
+} from '../actions'
+
+import * as Actions from '../actions'
+
+import '../store/configureStore'
+
 import { bluegrey500 } from 'material-ui/styles/colors';
-import Tasks from '../components/Tasks.js';
-import Nav from '../components/Navbar.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import * as Spacing from 'material-ui/styles/spacing';
 
-//socketio stuff
+import Tasks from '../components/Tasks.js';
+import Navbar from '../components/Navbar.js';
 
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.requestTasks = this.requestTasks.bind(this)
-
   }
 
   componentDidMount() {
-    const { dispatch, selectedTask } = this.props
-    console.log('component did mount fired')
-    dispatch(fetchTasks(selectedTask))
-
+    const { dispatch } = this.props
+    dispatch(fetchTasksIfNeeded())
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, selectedTask } = nextProps
-    console.log('compont will receive props fired')
-    dispatch(fetchTasks())
-
+    if (nextProps.data !== this.props.data){
+      const { dispatch, data } = nextProps
+      dispatch(fetchTasksIfNeeded())
+    }
   }
 
   requestTasks() {
-    const { dispatch, selectedTask } = this.props
+    const { dispatch, data } = this.props
     dispatch(fetchTasks())
-    console.log('requestTask fired')
   }
 
-  addTask() {
-
+  addTask(task) {
+    dispatch(postTask(task))
   }
 
   modifyTask() {
-
   }
-
-
 
   render() {
     const muiTheme = getMuiTheme({
-      palette: {
-        primary1Color:"blueGrey500"
-      },
-      position:{
-
-      }
-  });
+      palette: { primary1Color:"blueGrey500" },
+      position: {}
+    });
     return (
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
-            <Nav />
-            <Tasks task={task} />
-          </div>
-        </MuiThemeProvider>
-      );
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <Navbar data={ this.props.data } actions={ this.props.actions } />
+          <Tasks data={ this.props.data } actions={ this.props.actions } />
+        </div>
+      </MuiThemeProvider>
+    );
   }
 }
 
-
-const task = {
-  title: 'Set up front-end',
-  status: 'In Progress',
-  dueDate: '10/10/10',
-  category: 'Front-End',
-  points: 20,
-  notes: 'create webpack config file',
-  owner: 'Heather',
-  creator: 'Someone else',
-  comments: [
-    {
-      user: 'Joe',
-      comment: 'Cool'
-    },
-    {
-      user: 'Joe',
-      comment: 'Cool'
-    }
-  ]
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  data: PropTypes.array.isRequired
 }
 
+const mapStateToProps = state => state
 
-
-// App.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   isFetching: PropTypes.bool.isRequired,
-//   tasks: PropTypes.array.isRequired
-// }
-
-function mapStateToProps(state) {
-  const { } = state
-  const {
-    isFetching,
-    lastUpdated,
-    data: tasks
-  } = {isFetching: true, data: []}
-
+//pass actions to props
+const mapDispatchToProps = (dispatch) => {
   return {
-    tasks,
-    isFetching,
-    lastUpdated
+    actions: bindActionCreators(Actions, dispatch),
+    dispatch: dispatch
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
