@@ -40,11 +40,6 @@ app.get('/tasks', function(req, res) {
 app.post('/tasks', function(req, res) {
 	var newTask = req.body;
 
-  //If no name task name is provided
-	if (!req.body.task) {
-    handleError(res, 'Blank task name', 'Must provide task name', 400);
-	}
-
 	db.collection('tasks').insertOne(newTask, function(err, data) {
 		err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
 	});

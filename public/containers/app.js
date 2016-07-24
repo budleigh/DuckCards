@@ -1,8 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+<<<<<<< 8b67148bf95f1f222740276bc765374c11e326e5
 import { render } from 'react-dom';
 import { fetchTasks } from '../actions'
 import { bluegrey500 } from 'material-ui/styles/colors';
+=======
+import {render} from 'react-dom';
+import {
+  fetchTasks, receiveTasks,
+  fetchTasksIfNeeded
+} from '../actions'
+import '../store/configureStore'
+
+>>>>>>> State mapped to props
 import Tasks from '../components/Tasks.js';
 import Nav from '../components/Navbar.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -21,23 +31,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, selectedTask } = this.props
-    console.log('component did mount fired')
-    dispatch(fetchTasks(selectedTask))
+    const { dispatch } = this.props
+    dispatch(fetchTasksIfNeeded())
 
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, selectedTask } = nextProps
-    console.log('compont will receive props fired')
-    dispatch(fetchTasks())
-
+    if (nextProps.data !== this.props.data){
+      const { dispatch, data } = nextProps
+      dispatch(fetchTasksIfNeeded())
+    }
   }
 
   requestTasks() {
-    const { dispatch, selectedTask } = this.props
+    const { dispatch, data } = this.props
     dispatch(fetchTasks())
-    console.log('requestTask fired')
   }
 
   addTask() {
@@ -60,58 +68,34 @@ class App extends Component {
       }
   });
     return (
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <div>
-            <Nav />
-            <Tasks task={task} />
-          </div>
-        </MuiThemeProvider>
-      );
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <Nav />
+          <Tasks data={ this.props } />
+        </div>
+      </MuiThemeProvider>
+    );
   }
 }
 
 
-const task = {
-  title: 'Set up front-end',
-  status: 'In Progress',
-  dueDate: '10/10/10',
-  category: 'Front-End',
-  points: 20,
-  notes: 'create webpack config file',
-  owner: 'Heather',
-  creator: 'Someone else',
-  comments: [
-    {
-      user: 'Joe',
-      comment: 'Cool'
-    },
-    {
-      user: 'Joe',
-      comment: 'Cool'
-    }
-  ]
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  data: PropTypes.array.isRequired
 }
 
 
-
-// App.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-//   isFetching: PropTypes.bool.isRequired,
-//   tasks: PropTypes.array.isRequired
-// }
-
-function mapStateToProps(state) {
-  const { } = state
-  const {
-    isFetching,
-    lastUpdated,
-    data: tasks
-  } = {isFetching: true, data: []}
-
+const mapStateToProps = (state) => {
   return {
-    tasks,
-    isFetching,
-    lastUpdated
+    data: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
   }
 }
 

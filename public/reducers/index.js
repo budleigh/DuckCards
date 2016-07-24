@@ -7,9 +7,9 @@ import {
 
 
 function tasks(state = {
-  isFetching: false,
-  items: []
+  isFetching: false
 }, action) {
+
   switch (action.type) {
     case REQUEST_TASKS:
       return Object.assign({}, state, {
@@ -18,8 +18,8 @@ function tasks(state = {
     case RECEIVE_TASKS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: action.tasks,
-        lastUpdated: action.receivedAt
+        data: action.data,
+        lastUpdated: Date.now()
       })
     default:
       return state
@@ -29,3 +29,5 @@ function tasks(state = {
 const rootReducer = tasks
 
 export default rootReducer
+
+
