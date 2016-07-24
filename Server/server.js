@@ -49,7 +49,7 @@ app.post('/tasks', function(req, res) {
 app.post('/update', function(req, res) {
   var updates = req.body.updates;
   var title = req.body.title;
-  db.collection('tasks').update({ "title": title }, { $set: { "title": updates }}, function(err, data) {
+  db.collection('tasks').update({ "title": title }, { $set: { updates }}, function(err, data) {
     err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data)
   });
 });
