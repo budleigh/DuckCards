@@ -23,7 +23,7 @@ class Tasks extends React.Component {
     };
 
 
-    const filteredTasks = filterTasks(this.props.data.data.data);
+    const filteredTasks = filterTasks(this.props.data);
 
     const {todos, inProgress, completed} = filteredTasks;
 
