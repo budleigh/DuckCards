@@ -2,8 +2,10 @@ var mongoose = require("mongoose");
 var url = process.env.MONGODB_URI || 'mongodb://localhost/appdb';
 
 var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
 var taskSchema = new Schema({
+  id: ObjectId,
   title: String,
   status: String,
   dueDate: String,

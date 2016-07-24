@@ -63,12 +63,6 @@ class App extends Component {
           <Tasks data={ this.props.data } actions={ this.props.actions } />
         </div>
       </MuiThemeProvider>
-    );
-        // <Navbar />
-
-        //passing in promise
-        <Tasks task={task} />
-
     )
   }
 }
