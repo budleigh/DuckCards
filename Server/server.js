@@ -7,7 +7,7 @@ var db = require('./db/db.js');
 var app = express();
 
 // var oauth = new oauthServer({ model: {} });
-// var io = require("socket.io")(app);
+
 app.use(express.static(path.join(__dirname ,  '../build')));
 // app.use(oauth.authenticate());
 app.use(bodyParser.json());
