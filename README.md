@@ -1,4 +1,4 @@
-# Node, React, Redux, Mongo playground
+# Duck Tales
 
   Implmementing a project management app by getting the fundamentals right
 
