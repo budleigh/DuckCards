@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Navbar />
+          <Navbar data={ this.props.data } actions={ this.props.actions } />
           <Tasks data={ this.props.data } actions={ this.props.actions } />
         </div>
       </MuiThemeProvider>
