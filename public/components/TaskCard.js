@@ -2,11 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import TaskInfo from './TaskInfo';
-import TaskNotes from './TaskNotes';
-import TaskComments from './TaskComments';
-
 import {grey800, grey400, blueGrey500} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
@@ -27,7 +23,6 @@ class TaskCard extends React.Component {
           status={ task.status }
           dueDate={ task.dueDate }
           category={ task.category }
-          points={ task.points }
           owner={ task.owner } />
       </div>
     );

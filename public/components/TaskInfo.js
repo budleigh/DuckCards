@@ -12,8 +12,6 @@ const TaskInfo = ({ title, status, dueDate, category, points, owner }) => {
       <p className="task-title">{title}</p>
       <div className="cat-pts-container">
         <p>{owner}</p>
-        <p>&#9679;</p>
-        <p className="points">{points} points</p>
       </div>
     </div>
   );

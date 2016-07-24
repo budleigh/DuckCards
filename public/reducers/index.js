@@ -6,8 +6,16 @@ import {
  } from '../actions'
 
 
+// const initialState = {
+//   isFetching: false,
+//   modalType: null,
+//   modalProps: {}
+// }
+
 function tasks(state = {
-  isFetching: false
+  isFetching: false,
+  modalType: null,
+  modalProps: {}
 }, action) {
 
   switch (action.type) {
@@ -26,8 +34,24 @@ function tasks(state = {
   }
 }
 
-const rootReducer = tasks
+function modal(state = {
+  isFetching: false,
+  modalType: null,
+  modalProps: {}
+}, action) {
+  switch (action.type) {
+    case 'SHOW_MODAL':
+      return Object.assign({}, state, {
+        modalType: action.modalType,
+        modalProps: action.modalProps
+      })
+    case 'HIDE_MODAL':
+      return state
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({tasks, modal})
 
 export default rootReducer
-
-
