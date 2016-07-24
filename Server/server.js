@@ -39,48 +39,8 @@ app.get('/tasks', function(req, res) {
 //POSTS TASKS
 app.post('/tasks', function(req, res) {
 	var newTask = req.body;
-
+	
 	db.collection('tasks').insertOne(newTask, function(err, data) {
 		err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
 	});
 });
-
-
-
-
-
-
-
-
-
-// io.on('connection', function(socket) {
-// 	socket.on('tasks', function(task) {
-// 		io.emit('tasks', task);
-// 	})
-// })
-
-//   CLIENT SIDE
-// <script src="socket.io"></script>
-
-// var socket = io();
-
-// $('input').submit(function() {
-// 	socket.emit('tasks', ##input submission## );
-// 	##POST REQUEST##
-// });
-
-// socket.on('tasks', function(task) {
-// 	##GET REQUEST##
-// });
-
-
-
-
-// //Schema
-// /*
-// {
-// 'name': String,
-// 'description': String,
-// 'points': Number
-// }
-// */
