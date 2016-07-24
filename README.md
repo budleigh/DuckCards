@@ -20,7 +20,10 @@
 
 ## Usage
 
-> Some usage instructions
+```sh
+  npm run build
+  npm Server/server.js
+```
 
 ## Requirements
 
