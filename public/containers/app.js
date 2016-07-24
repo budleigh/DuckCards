@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { render } from 'react-dom';
 
 import {
   fetchTasks, receiveTasks,
-  fetchTasksIfNeeded
+  fetchTasksIfNeeded, postTask
 } from '../actions'
+
+// import * as Actions from '../actions'
+
 import '../store/configureStore'
 
 import { bluegrey500 } from 'material-ui/styles/colors';
@@ -41,7 +45,8 @@ class App extends Component {
     dispatch(fetchTasks())
   }
 
-  addTask() {
+  addTask(task) {
+    dispatch(postTask(task))
   }
 
   modifyTask() {
@@ -71,6 +76,13 @@ App.propTypes = {
 
 const mapStateToProps = state => state
 
-const mapDispatchToProps = dispatch => dispatch
+// const mapDispatchToProps = dispatch => dispatch
+//what do you want to be able to dispatch
+  //dispatch(fetchTasksIfNeeded())
+  //dispatch(addTask(task))
+
+const mapDispatchToProps = (dispatch) => ({
+  postTask: postTask
+})
 
 export default connect(mapStateToProps)(App)

@@ -19,17 +19,19 @@ export function receiveTasks(tasks) {
   }
 }
 
-export function postTask() {
-  return {
-    type: POST_TASK
+export function postTask(task) {
+  return dispatch => {
+    return axios.post('http://localhost:3000/tasks', task)
+      .then( response => dispatch(fetchTasks()) )
+      .catch( error => console.log(error) )
   }
 }
 
 export function fetchTasks() {
   return dispatch => {
     return axios.get('http://localhost:3000/tasks')
-      .then( response => dispatch(receiveTasks(response)))
-      .catch( error => console.log(error))
+      .then( response => dispatch(receiveTasks(response)) )
+      .catch( error => console.log(error) )
   }
 }
 
@@ -41,7 +43,6 @@ function shouldFetchTasks(state) {
   if (tasks.isFetching) {
     return false
   }
-  return tasks.didInvalidate
 }
 
 export function fetchTasksIfNeeded() {
