@@ -57,7 +57,7 @@ export function fetchTasksIfNeeded() {
 export function updateTask(title, update) {
   return dispatch => {
     return axios.post('http://localhost:3000/update', { title: title, body: update })
-      .then( response => dispatch(fetchTasks() )
+      .then( response => dispatch(fetchTasks() ))
       .catch( error => console.log(error) )
   }
 }

@@ -52,6 +52,6 @@ function modal(state = {
   }
 }
 
-const rootReducer = combineReducers({tasks, modal})
+const rootReducer = tasks
 
 export default rootReducer
