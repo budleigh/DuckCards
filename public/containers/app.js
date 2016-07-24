@@ -8,7 +8,7 @@ import {
   fetchTasksIfNeeded, postTask
 } from '../actions'
 
-// import * as Actions from '../actions'
+import * as Actions from '../actions'
 
 import '../store/configureStore'
 
@@ -61,7 +61,7 @@ class App extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Navbar />
-          <Tasks data={ this.props.data } />
+          <Tasks data={ this.props.data } actions={ this.props.actions } />
         </div>
       </MuiThemeProvider>
     );
@@ -76,13 +76,12 @@ App.propTypes = {
 
 const mapStateToProps = state => state
 
-// const mapDispatchToProps = dispatch => dispatch
-//what do you want to be able to dispatch
-  //dispatch(fetchTasksIfNeeded())
-  //dispatch(addTask(task))
+//pass actions to props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(Actions, dispatch),
+    dispatch: dispatch
+  }
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  postTask: postTask
-})
-
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
