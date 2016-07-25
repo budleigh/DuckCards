@@ -1,23 +1,15 @@
 import { combineReducers } from 'redux'
 import {
   REQUEST_TASKS, RECEIVE_TASKS,
-  POST_TASK, postTask,
-  fetchTasks
- } from '../actions'
+  POST_TASK, postTask, fetchTasks,
+  SHOW_MODAL, HIDE_MODAL
+} from '../actions'
 
-
-// const initialState = {
-//   isFetching: false,
-//   modalType: null,
-//   modalProps: {}
-// }
-
-function tasks(state = {
+export default function reducer(state = {
   isFetching: false,
   modalType: null,
   modalProps: {}
 }, action) {
-
   switch (action.type) {
     case REQUEST_TASKS:
       return Object.assign({}, state, {
@@ -29,29 +21,16 @@ function tasks(state = {
         data: action.data,
         lastUpdated: Date.now()
       })
-    default:
-      return state
-  }
-}
-
-function modal(state = {
-  isFetching: false,
-  modalType: null,
-  modalProps: {}
-}, action) {
-  switch (action.type) {
-    case 'SHOW_MODAL':
+    case SHOW_MODAL:
       return Object.assign({}, state, {
         modalType: action.modalType,
         modalProps: action.modalProps
       })
-    case 'HIDE_MODAL':
+    case HIDE_MODAL:
       return state
+
     default:
       return state
   }
 }
 
-const rootReducer = tasks
-
-export default rootReducer

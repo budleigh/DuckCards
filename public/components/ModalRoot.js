@@ -1,6 +1,9 @@
 // These are regular React components we will write soon
 import CreateTaskModal from './CreateTaskModal'
 import EditTaskModal from './EditTaskModal'
+import DeleteTaskModal from './DeleteTaskModal'
+import { connect } from 'react-redux'
+import React from 'react';
 
 const MODAL_COMPONENTS = {
   'CREATE_TASK': CreateTaskModal,

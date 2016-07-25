@@ -4,8 +4,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
+import showCreateTaskModal from '../actions'
+import ModalRoot from './ModalRoot'
 
 injectTapEventPlugin();
+
 
 class Nav extends React.Component {
   render(){
@@ -16,11 +19,8 @@ class Nav extends React.Component {
     style={{position: 'fixed'}}
     iconElementRight={
       <div>
-        <RaisedButton label="New Task"  />
-        <Dialog
-            title="Add new task!"
-            modal={false}
-          />
+        <RaisedButton label="New Task" onTouchTap={showCreateTaskModal} />
+        <ModalRoot />
       </div>
     }
   />

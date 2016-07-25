@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 
 import {
   fetchTasks, receiveTasks,
-  fetchTasksIfNeeded, postTask
+  fetchTasksIfNeeded, createTask
 } from '../actions'
 
 import * as Actions from '../actions'
@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   addTask(task) {
-    dispatch(postTask(task))
+    dispatch(createTask(task))
   }
 
   modifyTask() {

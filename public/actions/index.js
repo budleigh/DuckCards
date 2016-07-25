@@ -2,8 +2,10 @@ import axios from 'axios'
 
 export const REQUEST_TASKS = 'REQUEST_TASKS'
 export const RECEIVE_TASKS = 'RECIEVE_TASKS'
-export const POST_TASK = 'POST_TASK'
+export const CREATE_TASK = 'CREATE_TASK'
 export const UPDATE_TASK = 'UPDATE_TASK'
+export const SHOW_MODAL = "SHOW_MODAL"
+export const HIDE_MODAL = "HIDE_MODAL"
 
 
 export function requestTasks() {
@@ -20,7 +22,7 @@ export function receiveTasks(tasks) {
   }
 }
 
-export function postTask(task) {
+export function createTask(task) {
   return dispatch => {
     return axios.post('http://localhost:3000/tasks', task)
       .then( response => dispatch(fetchTasks()) )
@@ -62,6 +64,26 @@ export function updateTask(title, update) {
   }
 }
 
+export function deleteTask(title) {
+  return dispatch => {
+
+  }
+}
+
+
+export function hideModal() {
+  return dispatch => dispatch({type:'HIDE_MODAL'})
+}
+
+export function showCreateTaskModal() {
+  console.log('sup')
+  return dispatch => dispatch(
+    {
+      type: 'SHOW_MODAL',
+      modalType: 'CreateTaskModal'
+    }
+  )
+}
 
 
 
