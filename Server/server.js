@@ -2,7 +2,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
 var db = require('./db/db.js');
-var ObjectId = require('mongoose').Schema.ObjectId;
 
 var app = express();
 
