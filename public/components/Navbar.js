@@ -11,7 +11,7 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import TextField from 'material-ui/TextField'
 import MenuItem from 'material-ui/MenuItem'
 
-//this allows an onTouchTap event on some of material-UI's compnents
+//this allows an onTouchTap event on some of material-UI's components
 
 injectTapEventPlugin();
 
@@ -99,7 +99,7 @@ class Nav extends React.Component {
       />,
     ];
 
-    //this the the rendered nav bar
+    //this is the rendered nav bar
 
     return (
       <AppBar
