@@ -25,7 +25,7 @@ class Tasks extends React.Component {
     // tasks are passed as "data" on props
     const filteredTasks = filterTasks(this.props.data);
   
-    // es6 shorthand for assigning variables to corresponding properties on filteredTasks object
+    // es6 shorthand for assigning variables to corresponding properties on filteredTasks object (destructuring assignment)
     const {todos, inProgress, completed} = filteredTasks;
 
     return (
