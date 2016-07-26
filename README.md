@@ -18,16 +18,9 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
-
-```sh
-  npm run build
-  npm Server/server.js
-```
-
 ## Requirements
 
-- Node 0.10.x
+- Node
 - MongoDB
 - Mongoose
 - Express
