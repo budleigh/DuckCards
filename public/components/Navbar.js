@@ -1,6 +1,5 @@
 import React from 'react'
-import { AppBar } from 'material-ui'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
@@ -8,11 +7,11 @@ import showCreateTaskModal from '../actions'
 import ModalRoot from './ModalRoot'
 import Avatar from 'material-ui/Avatar'
 import FlatButton from 'material-ui/FlatButton'
-import { Field, reduxForm } from 'redux-form'
-import DatePicker from 'material-ui/DatePicker'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import TextField from 'material-ui/TextField'
 import MenuItem from 'material-ui/MenuItem'
+
+//this allows an onTouchTap event on some of material-UI's compnents
 
 injectTapEventPlugin();
 
@@ -25,53 +24,67 @@ class Nav extends React.Component {
 
   constructor() {
     super();
-    this.state = {open: false, value: 1, taskName: '', datePicker:'', CategoryChange: '', nameChange: '', status: "To Do"}
+    this.state = {open: false, value: 1, taskName: '', datePicker: '', CategoryChange: '', nameChange: '', status: "To Do"}
   };
 
   render(){
-    const handleChange = (e,i,v) => {
-      if(v == 1){
+
+    //function that sets the state status based on the value given by the dropdown menu
+
+    const handleChange = (event, key, value) => {
+      if(value == 1){
         this.setState({status: 'To Do'});
       }
-      else if(v == 2){
+      else if(value == 2){
         this.setState({status: 'In Progress'});
       } else {
         this.setState({status: 'Completed'});
       }
-    this.setState({value: v})
-
-    }
-
-    const handleSubmit = () => {
-      this.props.actions.createTask({title: this.state.taskName, dueDate: this.state.datePicker, category: this.state.CategoryChange, owner: this.state.nameChange, status: this.state.status})
-      handleClose()
+    this.setState({value: value});
     };
 
+    //this function handles submitting the properties in our state via createTask
+
+    const handleSubmit = () => {
+      this.props.actions.createTask({
+        title: this.state.taskName,
+        dueDate: this.state.datePicker,
+        category: this.state.CategoryChange,
+        owner: this.state.nameChange,
+        status: this.state.status
+      });
+      handleClose();
+    };
+
+    //These two functions manage the dialog popup based on the open prop in state
+
     const handleOpen = () => {
-      console.log("open")
       this.setState({open: true});
     };
 
     const handleClose = () => {
-      console.log("close")
       this.setState({open: false});
     };
 
-    const handleTaskNameChange = (e) => {
-      this.setState({taskName: e.target.value})
-    }
+    //These functions set the state of the forms with the value of the forms
 
-    const handleDatePickerChange = (e) => {
-      this.setState({datePicker: e.target.value})
-    }
+    const handleTaskNameChange = (event) => {
+      this.setState({taskName: event.target.value});
+    };
 
-    const handleCategoryChange = (e, i, v) => {
-      this.setState({CategoryChange: e.target.value})
-    }
+    const handleDatePickerChange = (event) => {
+      this.setState({datePicker: event.target.value});
+    };
 
-    const nameChange = (e) => {
-      this.setState({nameChange: e.target.value})
-    }
+    const handleCategoryChange = (event) => {
+      this.setState({CategoryChange: event.target.value});
+    };
+
+    const handleNameChange = (event) => {
+      this.setState({nameChange: event.target.value});
+    };
+
+    //these actions are buttons that either close the dialog box or submit the form inside
 
     const actions = [
       <FlatButton
@@ -85,6 +98,8 @@ class Nav extends React.Component {
         onTouchTap={handleSubmit}
       />,
     ];
+
+    //this the the rendered nav bar
 
     return (
       <AppBar
@@ -106,7 +121,7 @@ class Nav extends React.Component {
                <TextField onChange={handleTaskNameChange}  hintText="Task name" /><br />
                <TextField onChange={handleDatePickerChange} hintText="Due date" /><br />
                <TextField onChange={handleCategoryChange} hintText="Category"/><br />
-               <TextField onChange={nameChange} hintText="Name" />
+               <TextField onChange={handleNameChange} hintText="Name" />
                  <div>
                    <DropDownMenu
                     value={this.state.value}
@@ -128,7 +143,4 @@ class Nav extends React.Component {
   }
 }
 
-
-
-
-export default Nav
+export default Nav;
