@@ -1,6 +1,6 @@
 # Duck Tales
 
-  Implmementing a project management app by getting the fundamentals right
+  Implementing a project management app by getting the fundamentals right
 
 ## Team
 
