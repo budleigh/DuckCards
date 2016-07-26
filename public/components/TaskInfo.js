@@ -1,8 +1,8 @@
 import React from 'react';
-import Chip from 'material-ui/Chip';
-import Checkbox from 'material-ui/Checkbox';
 
-const TaskInfo = ({ title, status, dueDate, category, points, owner }) => {
+// es6 shorthand for giving corresponding variable names to props
+// this component contains the title, status, dueDate, category, and owner
+const TaskInfo = ({title, status, dueDate, category, owner}) => {
   return (
     <div>
       <div className="date-status-container">
