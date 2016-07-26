@@ -1,10 +1,10 @@
 import React from 'react';
 import TaskStatusColumn from './TaskStatusColumn';
 
-
+// container for all task columns and tasks
 class Tasks extends React.Component {
   render() {
-
+    // function to filter all tasks into appropriate categories
     function filterTasks(tasks = []) {
       return tasks.reduce(function(memo, task) {
         if (task.status === "To Do") {
@@ -22,8 +22,10 @@ class Tasks extends React.Component {
       });
     };
 
+    // tasks are passed as "data" on props
     const filteredTasks = filterTasks(this.props.data);
-
+  
+    // es6 shorthand for assigning variables to corresponding properties on filteredTasks object
     const {todos, inProgress, completed} = filteredTasks;
 
     return (
