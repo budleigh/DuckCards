@@ -1,4 +1,4 @@
-# Duck Tales
+# Duck Cards
 
   Implementing a project management app by getting the fundamentals right
 
