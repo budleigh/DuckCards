@@ -2,16 +2,19 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
 var db = require('./db/db.js');
+var http = require('http');
 
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 app.use(express.static(path.join(__dirname ,  '../build')));
 app.use(bodyParser.json());
 
 //RUN SERVER
-var server = app.listen(process.env.PORT || 3000, function() {
-  var port = server.address().port;
-  console.log("App now running on port " + port);
+var port = process.env.PORT || 3000;
+server.listen(port, function () {
+  console.log('listening on port', port);
 });
 
 //SERVE UP STATIC INDEX.HTML
