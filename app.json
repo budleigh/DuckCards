@@ -1,0 +1,15 @@
+{
+  "name": "DuckCards",
+  "description": "",
+  "scripts": {},
+  "env": {},
+  "formation": {},
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/node"
+    }
+  ]
+}
