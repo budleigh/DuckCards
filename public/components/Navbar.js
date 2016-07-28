@@ -1,5 +1,5 @@
 import React from 'react'
-import AppBar from 'material-ui'
+import { AppBar } from 'material-ui'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
