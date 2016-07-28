@@ -1,6 +1,6 @@
 # Duck Cards
 
-  Implementing a project management app by getting the fundamentals right
+  Task management app with best practices implementation of React, Redux, Node, MongoDB
 
 ## Team
 
