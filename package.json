@@ -6,7 +6,6 @@
     "type": "git",
     "url": "https://github.com/TeamPikachu/Cheese"
   },
-  "engines": "6.2.2",
   "scripts": {
     "postinstall": "npm run build",
     "start": "node Server/server.js",
