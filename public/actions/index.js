@@ -24,7 +24,7 @@ export function receiveTasks(tasks) {
 
 export function createTask(task) {
   return dispatch => {
-    return axios.post('http://localhost:3000/tasks', task)
+    return axios.post('/tasks', task)
       .then( response => dispatch(fetchTasks()) )
       .catch( error => console.log(error) )
   }
@@ -32,7 +32,7 @@ export function createTask(task) {
 
 export function fetchTasks() {
   return dispatch => {
-    return axios.get('http://localhost:3000/tasks')
+    return axios.get('/tasks')
       .then( response => dispatch(receiveTasks(response)) )
       .catch( error => console.log(error) )
   }
@@ -58,7 +58,7 @@ export function fetchTasksIfNeeded() {
 
 export function updateTask(title, update) {
   return dispatch => {
-    return axios.post('http://localhost:3000/update', { title: title, body: update })
+    return axios.post('/update', { title: title, body: update })
       .then( response => dispatch(fetchTasks() ))
       .catch( error => console.log(error) )
   }
