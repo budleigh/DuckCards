@@ -9,7 +9,6 @@ const TaskStatusColumn = ({tasks, columnName}) => {
       <div className="column-title">
         <p>{columnName}</p>
       </div>
-      // map through "tasks" props to add each one to the column
       {tasks.map((task, index) =>
         <TaskCard task={task} key={index} />
       )}
