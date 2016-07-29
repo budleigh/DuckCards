@@ -6,8 +6,7 @@ var jwt = require('jwt-simple');
 var http = require('http');
 var User = require('./db/userModel.js');
 var Project = require('./db/projectModel.js');
-
-var secret = process.env.SECRET || 'whatyoudontlikefalafel';
+var userRoutes = require('./userRoutes');
 
 var app = express();
 var server = http.createServer(app);
@@ -77,49 +76,10 @@ app.post('/projects/:projectId/tasks/:taskId/update', function(req, res) {
 });
 
 // SIGN UP USER
-app.post('/users/signup', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-
-  User.findOne({username: username}, function (err, user) {
-    if (user) {
-      res.send('User already exists');
-    } else {
-      return User.create({
-        username: username,
-        password: password
-      }, function (err, user) {
-        if (err) {
-          res.send('failed to create user');
-        } else {
-          var token = jwt.encode(user, secret);
-          res.json({token: token});
-        }
-      });
-    }
-  });
-});
+app.post('/users/signup', userRoutes.signUp);
 
 // SIGN IN USER
-app.post('/users/signin', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-
-  User.findOne({username: username}, function (err, user) {
-    if (!user) {
-      res.send(404);
-    } else {
-      return user.comparePasswords(password, function (match) {
-        if (match) {
-          var token = jwt.encode(user, secret);
-          res.json({token: token});
-        } else {
-          res.send(201);
-        }
-      });
-    }
-  });
-});
+app.post('/users/signin', userRoutes.signIn);
 
 // CREATE A PROJECT
 app.post('/users/projects', function (req, res) {
