@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var taskSchema = new Schema({
+var projectSchema = new Schema({
   id: ObjectId,
   name: String,
   tasks: [{
@@ -23,4 +23,4 @@ var taskSchema = new Schema({
   users: [String]
 });
 
-module.exports = mongoose.model('Task', taskSchema);
+module.exports = mongoose.model('Project', projectSchema);

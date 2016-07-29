@@ -2,7 +2,6 @@ var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 
 var userSchema = new mongoose.Schema({
-  id: Number,
   username: String,
   password: String
 });
@@ -18,7 +17,6 @@ userSchema.methods.comparePasswords = function (candidatePassword, cb) {
     }
   });
 };
-
 
 userSchema.pre('save', function (next) {
   var user = this;

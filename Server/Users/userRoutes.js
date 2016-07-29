@@ -1,4 +1,5 @@
-var User = require('./db/userModel.js');
+var User = require('./userModel.js');
+var db = require('../db/db');
 var jwt = require('jwt-simple');
 var secret = process.env.SECRET || 'whatyoudontlikefalafel';
 
@@ -24,7 +25,7 @@ module.exports = {
           }
         });
       }
-    })
+    });
   },
   //sign-in
   signIn: function (req, res) {
@@ -45,5 +46,17 @@ module.exports = {
         });
       }
     });
+  },
+
+  projects: function (req, res) {
+    var username = jwt.decode(req.headers['x-access-token'], secret).username;
+
+    db.collection('projects').find({ users: username }).toArray(function (err, projects) {
+      if (err) {
+        res.send(404);
+      } else {
+        res.json(projects);
+      }
+    });
   }
-}
+};
