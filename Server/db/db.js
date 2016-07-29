@@ -1,11 +1,12 @@
 var mongoose = require("mongoose");
+var bcrypt = require("bcrypt-nodejs");
 var url = process.env.MONGODB_URI || 'mongodb://localhost/appdb';
 
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var taskSchema = new Schema({
-  id: ObjectId,
+  id: ObjectId, // WTH is this
   title: String,
   status: String,
   dueDate: String,
@@ -17,10 +18,19 @@ var taskSchema = new Schema({
   comments: [{
       user: String,
       comment: String
-    }]
-  });
+    }],
+  projects: Number
+});
+
+
+var projectSchema = new Schema({
+  id: Number,
+  name: String
+});
+
 
 var Task = mongoose.model('Task', taskSchema);
+var Project = mongoose.model('Project', projectSchema);
 
 mongoose.connect(url);
 

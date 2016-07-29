@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var path = require('path');
 var db = require('./db/db.js');
 var http = require('http');
+var User = require('./db/userModel.js');
 
 var app = express();
 var server = http.createServer(app);
@@ -50,4 +51,41 @@ app.post('/update', function(req, res) {
   db.collection('tasks').update({ "title": title }, { $set:  updates }, function(err, data) {
     err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
   });
+});
+
+// SIGN UP USER
+app.post('/users/signup', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({username: username}, function (err, user) {
+    if (user) {
+      res.send('User already exists');
+    } else {
+      return User.create({
+        username: username,
+        password: password
+      })
+    }
+  })
+});
+
+// SIGN IN USER
+app.post('/users/signin', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({username: username}, function (err, user) {
+    if (!user) {
+      res.send(404);
+    } else {
+      return user.comparePasswords(password, function (match) {
+        if (match) {
+          res.send(200);
+        } else {
+          res.send(201);
+        }
+      })
+    }
+  })
 });
