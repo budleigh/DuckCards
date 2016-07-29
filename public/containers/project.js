@@ -21,7 +21,7 @@ import * as Spacing from 'material-ui/styles/spacing';
 import Tasks from '../components/Tasks.js';
 import Navbar from '../components/Navbar.js';
 
-class App extends Component {
+class Project extends Component {
   constructor(props) {
     super(props)
     this.requestTasks = this.requestTasks.bind(this)
@@ -67,7 +67,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+Project.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   data: PropTypes.array.isRequired
@@ -84,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Project)
