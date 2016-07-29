@@ -5,6 +5,7 @@ var db = require('./db/db.js');
 var jwt = require('jwt-simple');
 var http = require('http');
 var User = require('./db/userModel.js');
+var Project = require('./db/projectModel.js');
 
 var secret = process.env.SECRET || 'whatyoudontlikefalafel';
 
@@ -33,29 +34,45 @@ function handleError(res, error, message, code) {
 };
 
 //GETS TASKS
-app.get('/tasks', function(req, res) {
-  db.collection('tasks').find({}).toArray(function(err, data) {
-    err ? handleError(res, err.message, 'Failed to get tasks') : res.status(200).json(data);
+app.get('/projects/:id/tasks', function(req, res) {
+  var id = req.params.id;
+  Project.findById(id, function(err, data) {
+    err ? handleError(res, err.message, 'Failed to get tasks') : res.status(200).json(data.tasks);
   });
 });
 
 //POSTS TASKS
-app.post('/tasks', function(req, res) {
-  var project = req.body.projectName
-  var newTask = req.body.task;
+app.post('/projects/:id/tasks', function(req, res) {
+  var id = req.params.id;
+  var newTask = req.body;
 
-  db.collection('tasks').findOne({name: project}, function (err, project) {
-    project.tasks.push(newTask);
-    project.save();
+  Project.findById(id, function (err, project) {
+    if (err) {
+      res.send(404);
+    } else {
+      project.tasks.push(newTask);
+      project.save();
+      res.json(newTask);
+    }
   });
 });
 
 //UPDATE TASKS
-app.post('/update', function(req, res) {
-  var updates = req.body.updates;
-  var title = req.body.title;
-  db.collection('tasks').update({ "title": title }, { $set:  updates }, function(err, data) {
-    err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
+app.post('/projects/:projectId/tasks/:taskId/update', function(req, res) {
+  var updates = req.body;
+  var projectId = req.params.projectId;
+  var taskId = req.params.taskId;
+
+  Project.findById(projectId, function(err, project) {
+    project.tasks.forEach(function (task, i) {
+      var id = task._id.toString();
+
+      if (id === taskId) {
+        project.tasks[i] = updates;
+        project.save();
+        res.json(updates);
+      }
+    });
   });
 });
 
