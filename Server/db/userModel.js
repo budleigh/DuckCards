@@ -4,8 +4,7 @@ var bcrypt = require("bcrypt-nodejs");
 var userSchema = new mongoose.Schema({
   id: Number,
   username: String,
-  password: String,
-  projects: [Number]
+  password: String
 });
 
 userSchema.methods.comparePasswords = function (candidatePassword, cb) {

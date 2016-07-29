@@ -2,8 +2,11 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
 var db = require('./db/db.js');
+var jwt = require('jwt-simple');
 var http = require('http');
 var User = require('./db/userModel.js');
+
+var secret = process.env.SECRET || 'whatyoudontlikefalafel';
 
 var app = express();
 var server = http.createServer(app);
@@ -33,14 +36,17 @@ function handleError(res, error, message, code) {
 app.get('/tasks', function(req, res) {
   db.collection('tasks').find({}).toArray(function(err, data) {
     err ? handleError(res, err.message, 'Failed to get tasks') : res.status(200).json(data);
-  })
+  });
 });
 
 //POSTS TASKS
 app.post('/tasks', function(req, res) {
-  var newTask = req.body;
-  db.collection('tasks').insertOne(newTask, function(err, data) {
-    err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
+  var project = req.body.projectName
+  var newTask = req.body.task;
+
+  db.collection('tasks').findOne({name: project}, function (err, project) {
+    project.tasks.push(newTask);
+    project.save();
   });
 });
 
@@ -65,9 +71,16 @@ app.post('/users/signup', function(req, res) {
       return User.create({
         username: username,
         password: password
-      })
+      }, function (err, user) {
+        if (err) {
+          res.send('failed to create user');
+        } else {
+          var token = jwt.encode(user, secret);
+          res.json({token: token});
+        }
+      });
     }
-  })
+  });
 });
 
 // SIGN IN USER
@@ -81,11 +94,41 @@ app.post('/users/signin', function(req, res) {
     } else {
       return user.comparePasswords(password, function (match) {
         if (match) {
-          res.send(200);
+          var token = jwt.encode(user, secret);
+          res.json({token: token});
         } else {
           res.send(201);
         }
-      })
+      });
     }
-  })
+  });
+});
+
+// CREATE A PROJECT
+app.post('/users/projects', function (req, res) {
+  var projectName = req.body.projectName;
+  var username = jwt.decode(req.headers['x-access-token'], secret).username;
+
+  User.findOne({username: username}, function (err, user) {
+    if (!user) {
+      res.send(404);
+    } else {
+      db.collection('tasks').insertOne({name: projectName, tasks: [], users: [username]}, function(err, data) {
+        err ? handleError(res, err.message, 'Failed to create task') : res.status(201).json(data);
+      });
+    }
+  });
+});
+
+// GET PROJECTS FOR A USER
+app.get('/users/projects', function (req, res) {
+  var username = jwt.decode(req.headers['x-access-token'], secret).username;
+
+  db.collection('tasks').find({ users: username }).toArray(function (err, projects) {
+    if (err) {
+      res.send(404);
+    } else {
+      res.json(projects);
+    }
+  });
 });
