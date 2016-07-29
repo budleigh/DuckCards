@@ -1,12 +1,20 @@
 import axios from 'axios'
 
-export const REQUEST_TASKS = 'REQUEST_TASKS'
-export const RECEIVE_TASKS = 'RECIEVE_TASKS'
-export const CREATE_TASK = 'CREATE_TASK'
-export const UPDATE_TASK = 'UPDATE_TASK'
-export const SHOW_MODAL = "SHOW_MODAL"
-export const HIDE_MODAL = "HIDE_MODAL"
-export const CHANGE_AUTH_FIELD = "CHANGE_AUTH_FIELD"
+export const REQUEST_TASKS = 'REQUEST_TASKS';
+export const RECEIVE_TASKS = 'RECIEVE_TASKS';
+export const CREATE_TASK = 'CREATE_TASK';
+export const UPDATE_TASK = 'UPDATE_TASK';
+export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const CHANGE_AUTH_FIELD = "CHANGE_AUTH_FIELD";
+export const SIGN_USER_IN = "SIGN_USER_IN";
+
+export function signUserIn (username) {
+  return {
+    type: SIGN_USER_IN,
+    username
+  };
+}
 
 export function changeAuthField(field, value) {
   return {
@@ -47,7 +55,7 @@ export function fetchTasks() {
 }
 
 function shouldFetchTasks(state) {
-  const tasks = state.data
+  const tasks = state.tasks.data
   if (!tasks) {
     return true
   }

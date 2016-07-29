@@ -3,7 +3,7 @@ import {
   REQUEST_TASKS, RECEIVE_TASKS,
   POST_TASK, postTask, fetchTasks,
   SHOW_MODAL, HIDE_MODAL,
-  CHANGE_AUTH_FIELD
+  CHANGE_AUTH_FIELD, SIGN_USER_IN
 } from '../actions'
 
 function authForm (state = {}, action) {
@@ -39,7 +39,20 @@ function tasks (state = {
   }
 }
 
+function user (state = {}, action) {
+  switch(action.type) {
+    case SIGN_USER_IN:
+      return Object.assign({}, state, {
+        username: action.username
+      });
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   authForm,
-  tasks
+  tasks,
+  user
 });
