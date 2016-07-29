@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { changeAuthField } from '../../actions';
+import { signup } from '../../auth';
 
 class Signup extends Component {
   constructor(props) {
     super(props);
   }
 
-  postSignup() {
+  postSignup (e) {
+    e.preventDefault();
 
+    const { username, password, router } = this.props;
+
+    signup(username, password)
+      .then(() => {
+        router.replace('/signin');
+      });
   }
 
   onFieldChange(e) {
@@ -35,13 +44,17 @@ class Signup extends Component {
           value={this.props.password}
           onChange={this.onFieldChange.bind(this)}
         />
+        <input
+          type="submit"
+          value="sign up"
+        />
       </form>
     );
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state.authForm;
 
 export default connect(
   mapStateToProps
-)(Signup);
+)(withRouter(Signup));
