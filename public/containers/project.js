@@ -74,7 +74,7 @@ Project.propTypes = {
 }
 
 
-const mapStateToProps = state => state
+const mapStateToProps = state => state.tasks
 
 //pass actions to props
 const mapDispatchToProps = (dispatch) => {
