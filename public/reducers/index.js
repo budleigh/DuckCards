@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import {
   REQUEST_TASKS, RECEIVE_TASKS,
   POST_TASK, postTask, fetchTasks,
-  SHOW_MODAL, HIDE_MODAL
+  SHOW_MODAL, HIDE_MODAL,
+  CHANGE_AUTH_FIELD
 } from '../actions'
 
 export default function reducer(state = {
@@ -28,6 +29,10 @@ export default function reducer(state = {
       })
     case HIDE_MODAL:
       return state
+    case CHANGE_AUTH_FIELD:
+      return Object.assign({}, state, {
+        [action.field]: action.value
+      });
 
     default:
       return state

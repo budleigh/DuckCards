@@ -6,7 +6,15 @@ export const CREATE_TASK = 'CREATE_TASK'
 export const UPDATE_TASK = 'UPDATE_TASK'
 export const SHOW_MODAL = "SHOW_MODAL"
 export const HIDE_MODAL = "HIDE_MODAL"
+export const CHANGE_AUTH_FIELD = "CHANGE_AUTH_FIELD"
 
+export function changeAuthField(field, value) {
+  return {
+    type: CHANGE_AUTH_FIELD,
+    field,
+    value
+  };
+}
 
 export function requestTasks() {
   return {

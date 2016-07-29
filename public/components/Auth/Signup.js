@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { changeAuthField } from '../../actions';
 
 class Signup extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class Signup extends Component {
   }
 
   onFieldChange(e) {
-    console.log(this.props.dispatch)
+    const action = changeAuthField(e.target.name, e.target.value);
+    this.props.dispatch(action);
   }
 
   render() {
