@@ -17,7 +17,7 @@ class Signin extends Component {
     signin(username, password)
       .then(() => {
         dispatch(signUserIn(username));
-        router.replace('/');
+        router.replace('/project');
       });
   }
 

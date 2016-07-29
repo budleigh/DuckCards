@@ -23,7 +23,7 @@ function requireAuth (nextState, replace) {
 render(
   <Provider store={ store }>
     <Router history={ hashHistory }>
-      <Route path="/" component={ Project } onEnter={ requireAuth } />
+      <Route path="/project" component={ Project } onEnter={ requireAuth } />
       <Route path="/signup" component={ Signup } />
       <Route path="/signin" component={ Signin } />
     </Router>
