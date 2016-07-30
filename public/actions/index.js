@@ -51,36 +51,10 @@ export function createTask(project, task) {
   }
 }
 
-export function fetchTasks(project) {
-  return dispatch => {
-    return axios.get('/projects/' + project + '/tasks')
-      .then( response => dispatch(receiveTasks(response)) )
-      .catch( error => console.log(error) )
-  }
-}
-
-function shouldFetchTasks(state) {
-  const tasks = state.tasks.data
-  if (!tasks) {
-    return true
-  }
-  if (tasks.isFetching) {
-    return false
-  }
-}
-
-export function fetchTasksIfNeeded() {
-  return (dispatch, getState) => {
-    if(shouldFetchTasks(getState())) {
-      return dispatch(fetchTasks())
-    }
-  }
-}
-
 export function updateTask(project, task) {
   return dispatch => {
     return axios.put('/projects/' + project + '/tasks', task)
-      .then(response => dispatch(fetchTasks(project)))
+      .then(response => dispatch(fetchProject(project)))
       .catch(error => console.log(error));
   };
 }
