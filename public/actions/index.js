@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetchProject } from './projects';
 
 export const REQUEST_TASKS = 'REQUEST_TASKS';
 export const RECEIVE_TASKS = 'RECIEVE_TASKS';
@@ -41,14 +42,14 @@ export function receiveTasks(tasks) {
 export function createTask(project, task) {
   return dispatch => {
     return axios.post('/projects/' + project + '/tasks', task)
-      .then( response => dispatch(fetchTasks()) )
+      .then( response => dispatch(fetchProject(project)) )
       .catch( error => console.log(error) )
   }
 }
 
 export function fetchTasks(project) {
   return dispatch => {
-    return axios.get('/project/' + project + '/tasks')
+    return axios.get('/projects/' + project + '/tasks')
       .then( response => dispatch(receiveTasks(response)) )
       .catch( error => console.log(error) )
   }
