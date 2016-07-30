@@ -1,4 +1,5 @@
 var Project = require('./projectModel');
+var User = require('../Users/userModel');
 var jwt = require('jwt-simple');
 var secret = process.env.SECRET || 'whatyoudontlikefalafel';
 
@@ -69,6 +70,31 @@ module.exports = {
         res.send(404);
       } else {
         res.json(project);
+      }
+    });
+  },
+
+  addUserToProject: function (req, res) {
+    var id = req.params.id;
+    var username = req.body.username;
+
+    Project.findById(id, function (err, project) {
+      if (err) {
+        res.status(404).json('Project does not exist');
+      } else {
+        if (project.users.indexOf(username) !== -1) {
+          res.status(409).json('User already is included in project');
+        } else {
+          User.findOne({ username: username }, function (err, user) {
+            if (!user) {
+              res.status(404).json('User does not exist');
+            } else {
+              project.users.push(username);
+              project.save();
+              res.status(200).json('User added successfully');
+            }
+          });
+        }
       }
     });
   }

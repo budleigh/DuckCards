@@ -28,6 +28,7 @@ app.get('/projects/:id', projectRoutes.getProject);
 app.get('/projects/:id/tasks', projectRoutes.getTasks);
 app.post('/projects/:id/tasks', projectRoutes.addTask);
 app.put('/projects/:id/tasks', projectRoutes.updateTask);
+app.post('/projects/:id/user', projectRoutes.addUserToProject);
 app.post('/users/signup', userRoutes.signUp);
 app.post('/users/signin', userRoutes.signIn);
 app.get('/users/projects', userRoutes.projects);
