@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { groupBy } from 'lodash';
 import TaskStatusColumn from './TaskStatusColumn';
 
@@ -19,4 +18,3 @@ class Tasks extends React.Component {
 }
 
 export default Tasks;
-

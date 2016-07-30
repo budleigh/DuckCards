@@ -1,7 +1,9 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { each } from 'lodash';
+import { setVisibility, changeField } from '../actions/taskModal';
 
-// es6 shorthand for giving corresponding variable names to props
-// this component contains the title, status, dueDate, category, and owner
 const TaskInfo = ({
   title,
   status,
@@ -23,4 +25,17 @@ const TaskInfo = ({
   </div>
 );
 
-export default TaskInfo;
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = (dispatch) => {
+  return Object.assign(
+    {
+      loadTaskIntoModal: (task) => {
+        each(task, (value, field) => changeField(field, value))
+      }
+    },
+    bindActionCreators({ setVisibility }, dispatch)
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskInfo);
