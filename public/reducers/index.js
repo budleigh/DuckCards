@@ -61,7 +61,7 @@ function dashboard (state = {}, action) {
     case RECEIVE_PROJECTS:
       return Object.assign({}, state, {
         isFetching: false,
-        data: action.data,
+        projects: action.projects,
         lastUpdated: Date.now()
       });
 

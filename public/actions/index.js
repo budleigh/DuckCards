@@ -1,13 +1,13 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const REQUEST_TASKS = 'REQUEST_TASKS';
 export const RECEIVE_TASKS = 'RECIEVE_TASKS';
 export const CREATE_TASK = 'CREATE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
-export const SHOW_MODAL = "SHOW_MODAL";
-export const HIDE_MODAL = "HIDE_MODAL";
-export const CHANGE_AUTH_FIELD = "CHANGE_AUTH_FIELD";
-export const SIGN_USER_IN = "SIGN_USER_IN";
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+export const CHANGE_AUTH_FIELD = 'CHANGE_AUTH_FIELD';
+export const SIGN_USER_IN = 'SIGN_USER_IN';
 
 export function signUserIn (username) {
   return {
@@ -86,7 +86,6 @@ export function deleteTask(title) {
   }
 }
 
-
 export function hideModal() {
   return dispatch => dispatch({type:'HIDE_MODAL'})
 }
@@ -100,6 +99,3 @@ export function showCreateTaskModal() {
     }
   )
 }
-
-
-
