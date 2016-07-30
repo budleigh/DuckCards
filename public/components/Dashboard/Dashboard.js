@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../actions/projects';
+import ProjectCreator from './ProjectCreator';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Dashboard extends Component {
         {this.props.projects.map((project) => {
           <div>{ project }</div>
         })}
+        <ProjectCreator />
       </div>
     );
   }
