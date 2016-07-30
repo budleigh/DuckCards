@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { each } from 'lodash';
-import { setVisibility, changeField } from '../actions/taskModal';
+import { setVisibility, changeField, setMode } from '../actions/taskModal';
 
 const TaskInfo = ({
   task,
@@ -28,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       loadTaskIntoModal: (task) => {
         each(task, (value, field) => dispatch(changeField(field, value)));
+        dispatch(setMode('update'));
         dispatch(setVisibility(true));
       }
     },
