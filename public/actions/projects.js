@@ -9,10 +9,10 @@ export function requestProjects() {
   };
 }
 
-export function receiveProjects(projects) {
+export function receiveProjects(response) {
   return {
     type: RECEIVE_PROJECTS,
-    projects: projects,
+    projects: response.data,
     receivedAt: Date.now()
   };
 }
