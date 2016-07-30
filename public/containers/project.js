@@ -31,12 +31,6 @@ class Project extends Component {
     this.loadProject();
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchTasksIfNeeded())
-    this.requestTasks();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.data !== this.props.data){
       const { dispatch, data } = nextProps
