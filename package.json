@@ -12,7 +12,8 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "node Server/server.js",
-    "build": "webpack --config webpack-production.config.js --progress --colors"
+    "build": "webpack --config webpack-production.config.js --progress --colors",
+    "dev": "webpack --config webpack-production.config.js --progress --colors --watch"
   },
   "private": true,
   "devDependencies": {
