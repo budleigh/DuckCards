@@ -1,9 +1,9 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { TextField, MenuItem, Dialog, DropDownMenu } from 'material-ui';
+import { TextField, MenuItem, Dialog, DropDownMenu, FlatButton } from 'material-ui';
 import { changeStatus, changeField, setVisibility } from '../actions/taskModal';
-import { createTask } from '../actions';
+import { createTask, updateTask } from '../actions';
 
 const styles = {
   width: '40%',
@@ -12,7 +12,8 @@ const styles = {
 
 const CreateTaskModal = ({
   taskModal,
-  actions,
+  projectId,
+  getActionButtons,
   changeStatus,
   changeField,
   setVisibility,
@@ -20,7 +21,7 @@ const CreateTaskModal = ({
 }) => (
   <Dialog
     title="New Task"
-    actions={actions}
+    actions={getActionButtons(taskModal, projectId)}
     modal={false}
     open={taskModal.open}
     onRequestClose={() => setVisibility(false)}
@@ -62,19 +63,48 @@ const CreateTaskModal = ({
   </Dialog>
 );
 
-const mapStateToProps = ({ taskModal }) => ({ taskModal });
+const mapStateToProps = ({ taskModal, project }) => ({
+  taskModal,
+  projectId: project.project._id
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return Object.assign({},
+const mapDispatchToProps = (dispatch, ownProps) => (
+  Object.assign(
+    {
+      changeField: field => e => dispatch(changeField(field, e.target.value)),
+
+      getActionButtons: (taskModal, projectId) => {
+        // depending on the modal mode, generate a button to either
+        // create a new task or update an existing task. the same
+        // data will be sent to the server in either case; whatever's
+        // in the modal input boxes
+        const submitTask = taskModal.mode === 'create' ?
+          createTask :
+          updateTask;
+
+        return [
+          <FlatButton
+            label="Cancel"
+            primary={true}
+            onTouchTap={() => dispatch(setVisibility(false))}
+          />,
+          <FlatButton
+            label="Submit"
+            primary={true}
+            onTouchTap={() => {
+              dispatch(submitTask(projectId, taskModal));
+              dispatch(setVisibility(false));
+            }}
+          />
+        ];
+      }
+    },
     bindActionCreators({
       changeStatus,
       setVisibility,
       createTask
-    }, dispatch),
-    {
-      changeField: field => e => dispatch(changeField(field, e.target.value))
-    }
-  );
-};
+    }, dispatch)
+  )
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskModal)
