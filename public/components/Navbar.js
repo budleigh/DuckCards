@@ -1,25 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppBar } from 'material-ui';
+import { AppBar, RaisedButton, Avatar, FlatButton } from 'material-ui';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import RaisedButton from 'material-ui/RaisedButton';
 import showCreateTaskModal from '../actions';
 import ModalRoot from './ModalRoot';
-import Avatar from 'material-ui/Avatar';
 import CreateTaskModal from './CreateTaskModal';
 import { bindActionCreators } from 'redux';
 import { setVisibility } from '../actions/taskModal';
+import { createTask } from '../actions';
 
 //this allows an onTouchTap event on some of material-UI's components
 
 injectTapEventPlugin();
 
 class Nav extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-  render(){
+  getModalActions() {
+    return {
+      closeModal: <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={() => this.props.setVisibility(false)}
+      />,
+
+      createTask: <FlatButton
+        label="Submit"
+        primary={true}
+        onTouchTap={() => this.props.createTask(this.props.taskModal)}
+      />
+    };
+  }
+
+  render() {
+    const { closeModal, createTask } = this.getModalActions();
 
     return (
       <AppBar
@@ -28,7 +44,7 @@ class Nav extends React.Component {
         style={{position: 'fixed'}}
         iconElementRight={
           <div>
-            <CreateTaskModal />
+            <CreateTaskModal actions={[closeModal, createTask]}/>
             <RaisedButton label="New Task" onTouchTap={() => this.props.setVisibility(true)} />
           </div>
         }
@@ -40,7 +56,8 @@ class Nav extends React.Component {
 const mapStateToProps = state => state;
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
-    setVisibility
+    setVisibility,
+    createTask
   }, dispatch)
 );
 
