@@ -1,10 +1,12 @@
 import {
   CHANGE_STATUS,
   CHANGE_FIELD,
+  SET_MODE,
   SET_VISIBILITY
 } from '../actions/taskModal';
 
 const defaultState = {
+  mode: 'create',
   open: false,
   title: '',
   dueDate: '',
@@ -36,6 +38,11 @@ const taskModal = (state = defaultState, action) => {
     case SET_VISIBILITY:
       return Object.assign({}, state, {
         open: action.value
+      });
+
+    case SET_MODE:
+      return Object.assign({}, state, {
+        mode: action.value
       });
 
     default:
