@@ -24,28 +24,15 @@ import Navbar from '../components/Navbar.js';
 class Project extends Component {
   constructor(props) {
     super(props)
-    this.requestTasks = this.requestTasks.bind(this)
   }
 
   componentWillMount() {
     this.loadProject();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data){
-      const { dispatch, data } = nextProps
-      dispatch(fetchTasksIfNeeded())
-    }
-  }
-
   loadProject() {
     const { dispatch } = this.props;
     dispatch(fetchProject(this.props.params.projectId));
-  }
-
-  requestTasks() {
-    const { dispatch, data } = this.props
-    dispatch(fetchTasks(this.props.project._id))
   }
 
   addTask(task) {
