@@ -79,7 +79,7 @@ export function fetchTasksIfNeeded() {
 
 export function updateTask(project, task) {
   return dispatch => {
-    return axios.put('/projects' + project + '/tasks', task)
+    return axios.put('/projects/' + project + '/tasks', task)
       .then(response => dispatch(fetchTasks()))
       .catch(error => console.log(error));
   };
