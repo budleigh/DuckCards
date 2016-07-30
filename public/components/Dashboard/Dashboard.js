@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProjects } from '../../actions/projects';
+import { fetchProjects, createProject } from '../../actions/projects';
 import ProjectCreator from './ProjectCreator';
 
 class Dashboard extends Component {
@@ -22,7 +22,7 @@ class Dashboard extends Component {
         {this.props.projects.map((project) => {
           <div>{ project }</div>
         })}
-        <ProjectCreator onCreate={this.onCreate} />
+        <ProjectCreator onCreate={this.onCreate.bind(this)} />
       </div>
     );
   }
