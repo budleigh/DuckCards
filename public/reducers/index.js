@@ -6,6 +6,10 @@ import {
   CHANGE_AUTH_FIELD, SIGN_USER_IN
 } from '../actions'
 
+import {
+  REQUEST_PROJECTS, RECEIVE_PROJECTS
+} from '../actions/projects';
+
 function authForm (state = {}, action) {
   switch (action.type) {
     case CHANGE_AUTH_FIELD:
@@ -51,8 +55,31 @@ function user (state = {}, action) {
   }
 }
 
+function dashboard (state = {
+  projects: [],
+  isFetching: false
+}, action) {
+  switch (action.type) {
+    case REQUEST_PROJECTS:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+
+    case RECEIVE_PROJECTS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        projects: action.projects,
+        lastUpdated: Date.now()
+      });
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   authForm,
   tasks,
-  user
+  user,
+  dashboard
 });
