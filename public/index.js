@@ -13,7 +13,7 @@ import axios from 'axios';
 
 // ???
 axios.interceptors.request.use(function (config) {
-  config.headers['x-request-access'] = getToken();
+  config.headers['x-access-token'] = getToken();
   return config;
 });
 
