@@ -1,15 +1,16 @@
-import React from 'react'
-import { AppBar } from 'material-ui'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-import RaisedButton from 'material-ui/RaisedButton'
-import Dialog from 'material-ui/Dialog'
-import showCreateTaskModal from '../actions'
-import ModalRoot from './ModalRoot'
-import Avatar from 'material-ui/Avatar'
-import FlatButton from 'material-ui/FlatButton'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import TextField from 'material-ui/TextField'
-import MenuItem from 'material-ui/MenuItem'
+import React from 'react';
+import { connect } from 'react-redux';
+import { AppBar } from 'material-ui';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import showCreateTaskModal from '../actions';
+import ModalRoot from './ModalRoot';
+import Avatar from 'material-ui/Avatar';
+import FlatButton from 'material-ui/FlatButton';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import TextField from 'material-ui/TextField';
+import MenuItem from 'material-ui/MenuItem';
 
 //this allows an onTouchTap event on some of material-UI's components
 
@@ -21,10 +22,8 @@ const styles = {
 };
 
 class Nav extends React.Component {
-
   constructor() {
     super();
-    this.state = {open: false, value: 1, taskName: '', datePicker: '', CategoryChange: '', nameChange: '', status: "To Do"}
   };
 
   render(){
@@ -143,4 +142,6 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+const mapStateToProps = state => state.taskModal;
+
+export default connect(mapStateToProps)(Nav);
