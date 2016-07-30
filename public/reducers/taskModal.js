@@ -1,7 +1,7 @@
 import {
   CHANGE_STATUS,
   CHANGE_FIELD,
-  SET_VISIBILTY
+  SET_VISIBILITY
 } from '../actions/taskModal';
 
 const defaultState = {
