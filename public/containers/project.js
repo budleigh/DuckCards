@@ -80,7 +80,6 @@ class Project extends Component {
 Project.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  data: PropTypes.array.isRequired,
   project: PropTypes.object.isRequired
 }
 
