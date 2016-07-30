@@ -38,17 +38,17 @@ export function receiveTasks(tasks) {
   }
 }
 
-export function createTask(task) {
+export function createTask(project, task) {
   return dispatch => {
-    return axios.post('/tasks', task)
+    return axios.post('/projects/' + project + '/tasks', task)
       .then( response => dispatch(fetchTasks()) )
       .catch( error => console.log(error) )
   }
 }
 
-export function fetchTasks() {
+export function fetchTasks(project) {
   return dispatch => {
-    return axios.get('/tasks')
+    return axios.get('/project/' + project + '/tasks')
       .then( response => dispatch(receiveTasks(response)) )
       .catch( error => console.log(error) )
   }

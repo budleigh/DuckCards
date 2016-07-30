@@ -34,6 +34,7 @@ class Project extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchTasksIfNeeded())
+    this.requestTasks();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +51,7 @@ class Project extends Component {
 
   requestTasks() {
     const { dispatch, data } = this.props
-    dispatch(fetchTasks())
+    dispatch(fetchTasks(this.props.project._id))
   }
 
   addTask(task) {
@@ -70,7 +71,6 @@ class Project extends Component {
         <div>
           <Navbar data={ this.props.data } actions={ this.props.actions } />
           <Tasks data={ this.props.project.tasks } actions={ this.props.actions } />
-          <h1>Project: { this.props.project._id }</h1>
         </div>
       </MuiThemeProvider>
     )
