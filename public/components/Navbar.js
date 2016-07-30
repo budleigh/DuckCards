@@ -2,12 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppBar, RaisedButton, Avatar, FlatButton } from 'material-ui';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import showCreateTaskModal from '../actions';
-import ModalRoot from './ModalRoot';
-import CreateTaskModal from './CreateTaskModal';
-import { bindActionCreators } from 'redux';
-import { setVisibility } from '../actions/taskModal';
-import { createTask } from '../actions';
+import TaskModal from './TaskModal';
+import { setVisibility, setMode } from '../actions/taskModal';
 
 //this allows an onTouchTap event on some of material-UI's components
 
@@ -18,27 +14,8 @@ class Nav extends React.Component {
     super(props);
   }
 
-  getModalActions() {
-    return {
-      closeModal: <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={() => this.props.setVisibility(false)}
-      />,
-
-      createTask: <FlatButton
-        label="Submit"
-        primary={true}
-        onTouchTap={() => {
-          this.props.createTask(this.props.project.project._id, this.props.taskModal);
-          this.props.setVisibility(false);
-        }}
-      />
-    };
-  }
-
   render() {
-    const { closeModal, createTask } = this.getModalActions();
+    const { openCreateTaskModal } = this.props;
 
     return (
       <AppBar
@@ -47,8 +24,8 @@ class Nav extends React.Component {
         style={{position: 'fixed'}}
         iconElementRight={
           <div>
-            <CreateTaskModal actions={[closeModal, createTask]}/>
-            <RaisedButton label="New Task" onTouchTap={() => this.props.setVisibility(true)} />
+            <TaskModal />
+            <RaisedButton label="New Task" onTouchTap={openCreateTaskModal} />
           </div>
         }
       />
@@ -57,11 +34,11 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = state => state;
-const mapDispatchToProps = (dispatch) => (
-  bindActionCreators({
-    setVisibility,
-    createTask
-  }, dispatch)
-);
+const mapDispatchToProps = (dispatch) => ({
+  openCreateTaskModal: () => {
+    dispatch(setVisibility(true));
+    dispatch(setMode('create'));
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

@@ -51,56 +51,16 @@ export function createTask(project, task) {
   }
 }
 
-export function fetchTasks(project) {
+export function updateTask(project, task) {
   return dispatch => {
-    return axios.get('/projects/' + project + '/tasks')
-      .then( response => dispatch(receiveTasks(response)) )
-      .catch( error => console.log(error) )
-  }
-}
-
-function shouldFetchTasks(state) {
-  const tasks = state.tasks.data
-  if (!tasks) {
-    return true
-  }
-  if (tasks.isFetching) {
-    return false
-  }
-}
-
-export function fetchTasksIfNeeded() {
-  return (dispatch, getState) => {
-    if(shouldFetchTasks(getState())) {
-      return dispatch(fetchTasks())
-    }
-  }
-}
-
-export function updateTask(title, update) {
-  return dispatch => {
-    return axios.post('/update', { title: title, body: update })
-      .then( response => dispatch(fetchTasks() ))
-      .catch( error => console.log(error) )
-  }
+    return axios.put('/projects/' + project + '/tasks', task)
+      .then(response => dispatch(fetchProject(project)))
+      .catch(error => console.log(error));
+  };
 }
 
 export function deleteTask(title) {
   return dispatch => {
 
   }
-}
-
-export function hideModal() {
-  return dispatch => dispatch({type:'HIDE_MODAL'})
-}
-
-export function showCreateTaskModal() {
-  console.log('sup')
-  return dispatch => dispatch(
-    {
-      type: 'SHOW_MODAL',
-      modalType: 'CreateTaskModal'
-    }
-  )
 }

@@ -6,12 +6,7 @@ class TaskCard extends React.Component {
     const { task } = this.props;
     return (
       <div className="task-card-container">
-        <TaskInfo
-          title={ task.title }
-          status={ task.status }
-          dueDate={ task.dueDate }
-          category={ task.category }
-          owner={ task.owner } />
+        <TaskInfo task={task} />
       </div>
     );
   }
