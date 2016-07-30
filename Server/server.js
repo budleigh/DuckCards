@@ -7,6 +7,7 @@ var projectRoutes = require('./Projects/projectRoutes');
 
 var app = express();
 var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 app.use(express.static(path.join(__dirname ,  '../build')));
 app.use(bodyParser.json());
@@ -30,3 +31,10 @@ app.put('/projects/:id/tasks', projectRoutes.updateTask);
 app.post('/users/signup', userRoutes.signUp);
 app.post('/users/signin', userRoutes.signIn);
 app.get('/users/projects', userRoutes.projects);
+
+// socket to sync project changes between clients
+io.sockets.on('connection', function (socket) {
+  socket.on('update', function (projectId) {
+    io.sockets.emit('remote update', projectId);
+  });
+});
