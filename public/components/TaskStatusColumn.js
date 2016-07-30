@@ -3,7 +3,7 @@ import TaskCard from './TaskCard';
 import AddTask from './AddTask';
 
 // es6 shorthand for giving corresponding variable names to props
-const TaskStatusColumn = ({tasks, columnName}) => {
+const TaskStatusColumn = ({tasks = [], columnName}) => {
   return (
     <div className="task-column">
       <div className="column-title">
