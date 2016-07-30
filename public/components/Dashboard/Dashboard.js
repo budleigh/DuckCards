@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchProjects, createProject } from '../../actions/projects';
 import ProjectCreator from './ProjectCreator';
@@ -21,7 +22,7 @@ class Dashboard extends Component {
       <div>
         Hi
         {this.props.projects.map((project) => {
-          return (<div>{ project.name }</div>);
+          return (<div><Link to={ '/project/' + project._id }>{ project.name }</Link></div>);
         })}
         <ProjectCreator onCreate={this.onCreate.bind(this)} />
       </div>
