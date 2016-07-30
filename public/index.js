@@ -7,7 +7,14 @@ import Signup from './components/Auth/Signup';
 import Signin from './components/Auth/Signin';
 import configureStore from './store/configureStore';
 import { hashHistory, Router, Route } from 'react-router';
-import { signedIn } from './auth';
+import { signedIn, getToken } from './auth';
+import axios from 'axios';
+
+// ???
+axios.interceptors.request.use(function (config) {
+  config.headers['x-request-access'] = getToken();
+  return config;
+});
 
 const store = configureStore();
 
