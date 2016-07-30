@@ -1,5 +1,4 @@
 import React from 'react';
-import { partial } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { TextField, MenuItem, Dialog, DropDownMenu } from 'material-ui';
@@ -30,22 +29,22 @@ const CreateTaskModal = ({
     <form id="myForm" className='form' onSubmit={() => createTask(taskModal)}>
       <TextField
         value={taskModal.title}
-        onChange={partial(changeField, 'title')}
+        onChange={changeField('title')}
         hintText="Task name"
       /><br />
       <TextField
         value={taskModal.dueDate}
-        onChange={partial(changeField, 'dueDate')}
+        onChange={changeField('dueDate')}
         hintText="Due date"
       /><br />
       <TextField
         value={taskModal.category}
-        onChange={partial(changeField, 'category')}
+        onChange={changeField('category')}
         hintText="Category"/>
       <br />
       <TextField
         value={taskModal.owner}
-        onChange={partial(changeField, 'owner')}
+        onChange={changeField('owner')}
         hintText="Owner"
       />
       <div>
@@ -66,12 +65,16 @@ const CreateTaskModal = ({
 const mapStateToProps = ({ taskModal }) => ({ taskModal });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({
-    changeField,
-    changeStatus,
-    setVisibility,
-    createTask
-  }, dispatch);
+  return Object.assign({},
+    bindActionCreators({
+      changeStatus,
+      setVisibility,
+      createTask
+    }, dispatch),
+    {
+      changeField: field => e => dispatch(changeField(field, e.target.value))
+    }
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTaskModal)

@@ -16,10 +16,10 @@ export function setVisibility (value) {
   };
 }
 
-export function changeField (field, event) {
+export function changeField (field, value) {
   return {
     type: CHANGE_FIELD,
     field,
-    value: event.target.value
+    value
   };
 }
