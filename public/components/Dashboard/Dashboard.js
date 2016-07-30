@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProjects } from '../../actions/projects';
+import { fetchProjects, createProject } from '../../actions/projects';
+import ProjectCreator from './ProjectCreator';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -11,12 +12,18 @@ class Dashboard extends Component {
     this.props.dispatch(fetchProjects());
   }
 
+  onCreate(name) {
+    this.props.dispatch(createProject(name));
+  }
+
   render () {
     return (
       <div>
+        Hi
         {this.props.projects.map((project) => {
-          <div>{ project }</div>
+          return (<div>{ project.name }</div>);
         })}
+        <ProjectCreator onCreate={this.onCreate.bind(this)} />
       </div>
     );
   }
