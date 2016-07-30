@@ -55,7 +55,10 @@ function user (state = {}, action) {
   }
 }
 
-function dashboard (state = {}, action) {
+function dashboard (state = {
+  projects: [],
+  isFetching: false
+}, action) {
   switch (action.type) {
     case REQUEST_PROJECTS:
       return Object.assign({}, state, {
