@@ -1,4 +1,8 @@
-import { CHANGE_STATUS } from '../actions/taskModal';
+import {
+  CHANGE_STATUS,
+  CHANGE_FIELD,
+  SET_VISIBILTY
+} from '../actions/taskModal';
 
 const defaultState = {
   open: false,
@@ -22,6 +26,16 @@ const taskModal = (state = defaultState, action) => {
       return Object.assign({}, state, {
         value: action.value,
         status: statusValueMap[action.value],
+      });
+
+    case CHANGE_FIELD:
+      return Object.assign({}, state, {
+        [action.field]: action.value
+      });
+
+    case SET_VISIBILITY:
+      return Object.assign({}, state, {
+        open: action.value
       });
 
     default:
