@@ -17,7 +17,7 @@ axios.interceptors.request.use(function (config) {
   return config;
 });
 
-const store = configureStore();
+export const store = configureStore();
 
 function requireAuth (nextState, replace) {
   if (!signedIn()) {
