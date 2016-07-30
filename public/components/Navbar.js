@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { AppBar, RaisedButton, Avatar, FlatButton } from 'material-ui';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import showCreateTaskModal from '../actions';
-import ModalRoot from './ModalRoot';
-import CreateTaskModal from './CreateTaskModal';
+import TaskModal from './TaskModal';
 import { bindActionCreators } from 'redux';
 import { setVisibility } from '../actions/taskModal';
 import { createTask } from '../actions';
@@ -47,7 +46,7 @@ class Nav extends React.Component {
         style={{position: 'fixed'}}
         iconElementRight={
           <div>
-            <CreateTaskModal actions={[closeModal, createTask]}/>
+            <TaskModal actions={[closeModal, createTask]}/>
             <RaisedButton label="New Task" onTouchTap={() => this.props.setVisibility(true)} />
           </div>
         }
