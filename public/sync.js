@@ -15,7 +15,7 @@ socket.on('remote update', function (projectId) {
   }
 });
 
-export function ping (projectId) {
+export function emitUpdate (projectId) {
   socket.emit('update', projectId);
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchProject } from './projects';
-import { ping } from '../sync';
+import { emitUpdate } from '../sync';
 
 export const REQUEST_TASKS = 'REQUEST_TASKS';
 export const RECEIVE_TASKS = 'RECIEVE_TASKS';
@@ -45,7 +45,7 @@ export function createTask(project, task) {
     return axios.post('/projects/' + project + '/tasks', task)
       .then( response => {
         dispatch(fetchProject(project));
-        ping(project);
+        emitUpdate(project);
       } )
       .catch( error => console.log(error) )
   }
