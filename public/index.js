@@ -14,10 +14,11 @@ import axios from 'axios';
 // ???
 axios.interceptors.request.use(function (config) {
   config.headers['x-access-token'] = getToken();
+  console.log(config);
   return config;
 });
 
-const store = configureStore();
+export const store = configureStore();
 
 function requireAuth (nextState, replace) {
   if (!signedIn()) {
