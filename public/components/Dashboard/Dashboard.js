@@ -12,13 +12,17 @@ class Dashboard extends Component {
     this.props.dispatch(fetchProjects());
   }
 
+  onCreate(name) {
+    this.props.dispatch(createProject(name));
+  }
+
   render () {
     return (
       <div>
         {this.props.projects.map((project) => {
           <div>{ project }</div>
         })}
-        <ProjectCreator />
+        <ProjectCreator onCreate={this.onCreate} />
       </div>
     );
   }
