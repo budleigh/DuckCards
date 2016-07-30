@@ -32,7 +32,7 @@ render(
   <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route path="/" component = { Dashboard } onEnter={ requireAuth } />
-      <Route path="/project" component={ Project } onEnter={ requireAuth } />
+      <Route path="/project/:projectId" component={ Project } onEnter={ requireAuth } />
       <Route path="/signup" component={ Signup } />
       <Route path="/signin" component={ Signin } />
     </Router>

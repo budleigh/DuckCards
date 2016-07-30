@@ -23,6 +23,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/projects', projectRoutes.createProject);
+app.get('/projects/:id', projectRoutes.getProject);
 app.get('/projects/:id/tasks', projectRoutes.getTasks);
 app.post('/projects/:id/tasks', projectRoutes.addTask);
 app.put('/projects/:id/tasks', projectRoutes.updateTask);

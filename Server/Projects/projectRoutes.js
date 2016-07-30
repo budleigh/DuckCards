@@ -59,5 +59,17 @@ module.exports = {
         res.json(project);
       }
     });
+  },
+
+  getProject: function (req, res) {
+    var id = req.params.id;
+
+    Project.findById(id, function(err, project) {
+      if (err) {
+        res.send(404);
+      } else {
+        res.json(project);
+      }
+    });
   }
 }
