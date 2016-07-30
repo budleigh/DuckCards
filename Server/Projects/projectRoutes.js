@@ -59,7 +59,7 @@ module.exports = {
         res.json(project);
       }
     });
-  }
+  },
 
   getProject: function (req, res) {
     var id = req.params.id;
