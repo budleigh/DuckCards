@@ -79,12 +79,16 @@ module.exports = {
     var username = req.body.username;
 
     Project.findById(id, function (err, project) {
+      // check whether the project exists
       if (err) {
         res.status(404).json('Project does not exist');
       } else {
+        // check whether the user is already in project's users array
         if (project.users.indexOf(username) !== -1) {
           res.status(409).json('User already is included in project');
         } else {
+          // check if user exists in database
+          // if they don't, send an error, otherwise add user to project
           User.findOne({ username: username }, function (err, user) {
             if (!user) {
               res.status(404).json('User does not exist');
