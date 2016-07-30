@@ -1,7 +1,9 @@
-export function signin () {
-  return Promise.resolve({ token: 'hi' })
-    .then(({ token }) => {
-      localStorage.token = token;
+import axios from 'axios'
+
+export function signin (username, password) {
+  return axios.post('/users/signin', { username: username, password: password})
+    .then((response) => {
+      localStorage.token = response.data.token;
     });
 }
 
@@ -10,16 +12,13 @@ export function getToken () {
 }
 
 export function signout () {
-  return Promise.resolve(3)
-    .then(() => {
-      delete localStorage.token;
-    });
+  return delete localStorage.token;
 }
 
 export function signup (username, password) {
-  return Promise.resolve(3)
-    .then(() => {
-
+  return axios.post('/users/signup', { username: username, password: password })
+    .then((response) => {
+      localStorage.token = response.data.token;
     });
 }
 
