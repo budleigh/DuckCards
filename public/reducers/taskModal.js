@@ -6,11 +6,11 @@ import {
 
 const defaultState = {
   open: false,
-  value: 1,
-  taskName: '',
-  datePicker: '',
-  CategoryChange: '',
-  nameChange: '',
+  title: '',
+  dueDate: '',
+  category: '',
+  owner: '',
+  dropdownValue: 1,
   status: "To Do"
 };
 
@@ -24,7 +24,7 @@ const taskModal = (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_STATUS:
       return Object.assign({}, state, {
-        value: action.value,
+        dropdownValue: action.value,
         status: statusValueMap[action.value],
       });
 

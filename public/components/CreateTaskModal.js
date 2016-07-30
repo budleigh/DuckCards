@@ -29,28 +29,28 @@ const CreateTaskModal = ({
   >
     <form id="myForm" className='form' onSubmit={() => createTask(taskModal)}>
       <TextField
-        value={taskModal.taskName}
-        onChange={partial(changeField, 'taskName')}
+        value={taskModal.title}
+        onChange={partial(changeField, 'title')}
         hintText="Task name"
       /><br />
       <TextField
-        value={taskModal.datePicker}
-        onChange={partial(changeField, 'datePicker')}
+        value={taskModal.dueDate}
+        onChange={partial(changeField, 'dueDate')}
         hintText="Due date"
       /><br />
       <TextField
-        value={taskModal.CategoryChange}
-        onChange={partial(changeField, 'CategoryChange')}
+        value={taskModal.category}
+        onChange={partial(changeField, 'category')}
         hintText="Category"/>
       <br />
       <TextField
-        value={taskModal.nameChange}
-        onChange={partial(changeField, 'nameChange')}
-        hintText="Name"
+        value={taskModal.owner}
+        onChange={partial(changeField, 'owner')}
+        hintText="Owner"
       />
       <div>
         <DropDownMenu
-          value={taskModal.value}
+          value={taskModal.dropdownValue}
           onChange={(e, k, value) => changeStatus(value)}
           autoWidth={false}
         >
