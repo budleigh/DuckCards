@@ -21,7 +21,7 @@ class Dashboard extends Component {
       <div>
         Hi
         {this.props.projects.map((project) => {
-          return (<div>{ project.name }</div>);
+          return <div>{ project.name }</div>;
         })}
         <ProjectCreator onCreate={this.onCreate.bind(this)} />
       </div>

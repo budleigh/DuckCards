@@ -7,7 +7,9 @@ const ProjectCreator = ({ onCreate }) => {
     <div>
       Create project
         <form>
-          <input ref={node => { input = node; }} type="text" name="name" placeholder="name" />
+          <input ref={node => {
+             input = node;
+           }} />
         </form>
         <button onClick={() => {
           onCreate(input.value);
