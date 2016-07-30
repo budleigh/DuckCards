@@ -21,6 +21,14 @@ export function fetchProjects() {
   return dispatch => {
     return axios.get('/users/projects')
       .then( response => dispatch(receiveProjects(response)) )
-      .catch( error => console.log(error) )
+      .catch( error => console.log(error) );
+  };
+}
+
+export function createProject(name) {
+  return dispatch => {
+    return axios.post('/projects', { projectName: name })
+      .then( response => dispatch(fetchProjects()) )
+      .catch( error => console.log(error) );
   }
 }
