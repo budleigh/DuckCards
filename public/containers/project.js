@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { render } from 'react-dom';
-
+import { fetchProject } from '../actions/projects';
 import {
   fetchTasks, receiveTasks,
   fetchTasksIfNeeded, createTask
@@ -27,8 +27,12 @@ class Project extends Component {
     this.requestTasks = this.requestTasks.bind(this)
   }
 
+  componentWillMount() {
+    this.loadProject();
+  }
+
   componentDidMount() {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
     dispatch(fetchTasksIfNeeded())
   }
 
@@ -37,6 +41,11 @@ class Project extends Component {
       const { dispatch, data } = nextProps
       dispatch(fetchTasksIfNeeded())
     }
+  }
+
+  loadProject() {
+    const { dispatch } = this.props;
+    dispatch(fetchProject(this.props.params.projectId));
   }
 
   requestTasks() {
@@ -60,7 +69,8 @@ class Project extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Navbar data={ this.props.data } actions={ this.props.actions } />
-          <Tasks data={ this.props.data } actions={ this.props.actions } />
+          <Tasks data={ this.props.project.tasks } actions={ this.props.actions } />
+          <h1>Project: { this.props.project._id }</h1>
         </div>
       </MuiThemeProvider>
     )
@@ -70,11 +80,12 @@ class Project extends Component {
 Project.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  project: PropTypes.object.isRequired
 }
 
 
-const mapStateToProps = state => state.tasks
+const mapStateToProps = state => state.project
 
 //pass actions to props
 const mapDispatchToProps = (dispatch) => {
