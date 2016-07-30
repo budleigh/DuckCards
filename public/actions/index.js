@@ -77,30 +77,16 @@ export function fetchTasksIfNeeded() {
   }
 }
 
-export function updateTask(title, update) {
+export function updateTask(project, task) {
   return dispatch => {
-    return axios.post('/update', { title: title, body: update })
-      .then( response => dispatch(fetchTasks() ))
-      .catch( error => console.log(error) )
-  }
+    return axios.put('/projects' + project + '/tasks', task)
+      .then(response => dispatch(fetchTasks()))
+      .catch(error => console.log(error));
+  };
 }
 
 export function deleteTask(title) {
   return dispatch => {
 
   }
-}
-
-export function hideModal() {
-  return dispatch => dispatch({type:'HIDE_MODAL'})
-}
-
-export function showCreateTaskModal() {
-  console.log('sup')
-  return dispatch => dispatch(
-    {
-      type: 'SHOW_MODAL',
-      modalType: 'CreateTaskModal'
-    }
-  )
 }
