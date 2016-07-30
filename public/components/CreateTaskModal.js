@@ -28,10 +28,26 @@ const CreateTaskModal = ({
     contentStyle={styles}
   >
     <form id="myForm" className='form' onSubmit={() => createTask(taskModal)}>
-      <TextField onChange={partial(changeField, 'taskName')}  hintText="Task name" /><br />
-      <TextField onChange={partial(changeField, 'datePicker')} hintText="Due date" /><br />
-      <TextField onChange={partial(changeField, 'CategoryChange')} hintText="Category"/><br />
-      <TextField onChange={partial(changeField, 'nameChange')} hintText="Name" />
+      <TextField
+        value={taskModal.taskName}
+        onChange={partial(changeField, 'taskName')}
+        hintText="Task name"
+      /><br />
+      <TextField
+        value={taskModal.datePicker}
+        onChange={partial(changeField, 'datePicker')}
+        hintText="Due date"
+      /><br />
+      <TextField
+        value={taskModal.CategoryChange}
+        onChange={partial(changeField, 'CategoryChange')}
+        hintText="Category"/>
+      <br />
+      <TextField
+        value={taskModal.nameChange}
+        onChange={partial(changeField, 'nameChange')}
+        hintText="Name"
+      />
       <div>
         <DropDownMenu
           value={taskModal.value}
