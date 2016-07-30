@@ -29,7 +29,10 @@ class Nav extends React.Component {
       createTask: <FlatButton
         label="Submit"
         primary={true}
-        onTouchTap={() => this.props.createTask(this.props.taskModal)}
+        onTouchTap={() => {
+          this.props.createTask(this.props.project.project._id, this.props.taskModal);
+          this.props.setVisibility(false);
+        }}
       />
     };
   }
