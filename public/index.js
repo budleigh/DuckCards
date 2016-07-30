@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import Project from './containers/project';
+import Dashboard from './components/Dashboard/Dashboard';
 import Signup from './components/Auth/Signup';
 import Signin from './components/Auth/Signin';
 import configureStore from './store/configureStore';
@@ -30,6 +31,7 @@ function requireAuth (nextState, replace) {
 render(
   <Provider store={ store }>
     <Router history={ hashHistory }>
+      <Route path="/" component = { Dashboard } onEnter={ requireAuth } />
       <Route path="/project" component={ Project } onEnter={ requireAuth } />
       <Route path="/signup" component={ Signup } />
       <Route path="/signin" component={ Signin } />

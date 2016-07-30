@@ -6,6 +6,10 @@ import {
   CHANGE_AUTH_FIELD, SIGN_USER_IN
 } from '../actions'
 
+import {
+  REQUEST_PROJECTS, RECEIVE_PROJECTS
+} from '../actions/projects';
+
 function authForm (state = {}, action) {
   switch (action.type) {
     case CHANGE_AUTH_FIELD:

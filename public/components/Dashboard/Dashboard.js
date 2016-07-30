@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Dashboard extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
+  }
+
+  render () {
+    return (
+      <div>hello</div>
+    );
   }
 }
 
@@ -13,4 +19,4 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => state.dashboard;
 
-export default connect(mapStateToProps)(Project);
+export default connect(mapStateToProps)(Dashboard);
