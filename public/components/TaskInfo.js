@@ -25,7 +25,7 @@ const TaskInfo = ({
         Delete
       </button>
     </div>
-    <Comments />
+    <Comments task={task} />
   </div>
 );
 
