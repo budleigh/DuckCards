@@ -20,7 +20,7 @@ const CreateTaskModal = ({
   createTask
 }) => (
   <Dialog
-    title="New Task"
+    title={taskModal.mode === 'create' ? 'New Task' : 'Edit Task'}
     actions={getActionButtons(taskModal, projectId)}
     modal={false}
     open={taskModal.open}
