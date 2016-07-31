@@ -71,6 +71,14 @@ p {
 }
 
 /* ------------------------------------------------- */
+/* DASH BOARD/PROJECTS PAGE */
+/* ------------------------------------------------- */
+
+.projects {
+  text-align: center;
+}
+
+/* ------------------------------------------------- */
 /* TASK CARD */
 /* ------------------------------------------------- */
 
@@ -113,7 +121,7 @@ p {
 .category {
   font-weight: 600;
   color: #FFF;
-  background-color: #67809F;
+  background-color: rgb(2, 181, 204);
   border-radius: 50px;
   padding: 4px 15px;
 }
@@ -125,6 +133,7 @@ p {
 }
 
 .cat-pts-container {
+  position: float;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -145,11 +154,9 @@ p {
 }
 
 .navBar{
- background-color: #67809F;
  position: fixed;
  top: 0;
  left: 0;
- z-index: 9999;
  width: 100%;
  height: 50px;
 }

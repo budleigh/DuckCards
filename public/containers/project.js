@@ -12,9 +12,7 @@ import * as Actions from '../actions'
 
 import '../store/configureStore'
 
-import { bluegrey500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import * as Spacing from 'material-ui/styles/spacing';
 
@@ -43,12 +41,8 @@ class Project extends Component {
   }
 
   render() {
-    const muiTheme = getMuiTheme({
-      palette: { primary1Color:"blueGrey500" },
-      position: {}
-    });
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider>
         <div>
           <Navbar data={ this.props.data } actions={ this.props.actions } />
           <Tasks data={ this.props.project.tasks } actions={ this.props.actions } />
