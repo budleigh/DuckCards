@@ -26,7 +26,7 @@ class Nav extends React.Component {
 
     return (
       <AppBar
-        title={"Falafel.io"}
+        title={this.props.project.project.name}
         className="navBar"
         iconElementLeft={<IconButton containerElement={<Link to="/" />}><ActionHome /></IconButton>}
         iconElementRight={
