@@ -15,7 +15,7 @@ const ConfirmDeleteTaskModal = ({ modal, deleteTask, closeDeleteTaskModal }) => 
       label="DELETE"
       primary={true}
       onTouchTap={() => {
-        deleteTask(modal.taskId);
+        deleteTask(modal.projectId, modal.task._id);
         closeDeleteTaskModal();
       }}
     />

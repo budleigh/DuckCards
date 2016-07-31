@@ -5,6 +5,7 @@ import {
 
 const defaultState = {
   open: false,
+  projectId: null,
   task: {
     title: ''
   }
@@ -15,7 +16,8 @@ const confirmDeleteTaskModal = (state = defaultState, action) => {
     case OPEN_DELETE_TASK_MODAL:
       return Object.assign({}, state, {
         open: true,
-        task: action.task
+        task: action.task,
+        projectId: action.projectId
       });
 
     case CLOSE_DELETE_TASK_MODAL:

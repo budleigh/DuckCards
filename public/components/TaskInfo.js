@@ -7,6 +7,7 @@ import { openDeleteTaskModal } from '../actions/confirmDeleteTaskModal';
 
 const TaskInfo = ({
   task,
+  projectId,
   loadTaskIntoModal,
   openDeleteTaskModal
 }) => (
@@ -19,12 +20,16 @@ const TaskInfo = ({
     <div className="cat-pts-container">
       <p>{task.owner}</p>
       <button onClick={() => loadTaskIntoModal(task)}>edit</button>
-      <button onClick={() => openDeleteTaskModal(task)}>delete</button>
+      <button onClick={() => openDeleteTaskModal(task, projectId)}>
+        delete
+      </button>
     </div>
   </div>
 );
 
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => ({
+  projectId: state.project.project._id
+});
 
 const mapDispatchToProps = (dispatch) => {
   return Object.assign(
