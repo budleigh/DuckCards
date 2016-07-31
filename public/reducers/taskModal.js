@@ -2,7 +2,8 @@ import {
   CHANGE_STATUS,
   CHANGE_FIELD,
   SET_MODE,
-  SET_VISIBILITY
+  SET_VISIBILITY,
+  CLEAR_ALL_FIELDS
 } from '../actions/taskModal';
 
 const defaultState = {
@@ -44,6 +45,9 @@ const taskModal = (state = defaultState, action) => {
       return Object.assign({}, state, {
         mode: action.value
       });
+
+    case CLEAR_ALL_FIELDS:
+      return defaultState;
 
     default:
       return state;
