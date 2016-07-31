@@ -73,6 +73,34 @@ module.exports = {
     });
   },
 
+  commentOnTask: function (req, res) {
+    var projectId = req.params.id;
+    var taskId = req.body.task;
+    var comment = req.body.text;
+    var username = jwt.decode(req.headers['x-access-token'], secret).username;
+
+    Project.findById(projectId, function(err, project) {
+      if (err) {
+        res.send(404);
+      } else {
+        var taskIdx = _.findIndex(
+          project.tasks,
+          task => task._id.toString() === taskId
+        );
+
+        if (taskIdx !== -1) {
+          project.tasks[taskIdx].comments.push({
+            user: username,
+            comment: comment
+          });
+        }
+
+        project.save();
+        res.end();
+      }
+    })
+  },
+
   createProject: function (req, res) {
     var projectName = req.body.projectName;
     var username = jwt.decode(req.headers['x-access-token'], secret).username;

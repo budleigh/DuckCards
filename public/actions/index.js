@@ -9,6 +9,7 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const CHANGE_AUTH_FIELD = 'CHANGE_AUTH_FIELD';
 export const SIGN_USER_IN = 'SIGN_USER_IN';
+export const CHANGE_COMMENT_FIELD = 'CHANGE_COMMENT_FIELD';
 
 export function signUserIn (username) {
   return {
@@ -62,6 +63,25 @@ export function deleteTask(project, taskId) {
 
   return dispatch => {
     return axios.delete('/projects/' + project + '/tasks', config)
+      .then(response => dispatch(fetchProject(project)))
+      .catch(error => console.log(error));
+  };
+}
+
+export function changeCommentField(task, text) {
+  return {
+    type: CHANGE_COMMENT_FIELD,
+    text: text,
+    task: task
+  };
+}
+
+export function postComment(project, task, comment) {
+  return dispatch => {
+    return axios.post('/projects/' + project + '/tasks/comment', {
+        task: task,
+        text: comment
+      })
       .then(response => dispatch(fetchProject(project)))
       .catch(error => console.log(error));
   };
