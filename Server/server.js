@@ -11,6 +11,12 @@ var io = require('socket.io').listen(server);
 
 app.use(express.static(path.join(__dirname ,  '../build')));
 app.use(bodyParser.json());
+app.use('/projects/:id/*', function (req, res, next) {
+  // if we're modifying a project (id field)
+  // send out a notification to refetch proj
+  io.sockets.emit('remote update', req.params.id);
+  next();
+});
 
 //RUN SERVER
 var port = process.env.PORT || 3000;
@@ -32,10 +38,3 @@ app.post('/projects/:id/user', projectRoutes.addUserToProject);
 app.post('/users/signup', userRoutes.signUp);
 app.post('/users/signin', userRoutes.signIn);
 app.get('/users/projects', userRoutes.projects);
-
-// socket to sync project changes between clients
-io.sockets.on('connection', function (socket) {
-  socket.on('update', function (projectId) {
-    io.sockets.emit('remote update', projectId);
-  });
-});
