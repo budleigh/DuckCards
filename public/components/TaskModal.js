@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { TextField, MenuItem, Dialog, DropDownMenu, FlatButton } from 'material-ui';
 import { changeStatus, changeField, setVisibility } from '../actions/taskModal';
 import { createTask, updateTask } from '../actions';
+import DatePicker from 'material-ui/DatePicker';
 
 const styles = {
   width: '40%',
@@ -33,7 +34,7 @@ const CreateTaskModal = ({
         onChange={changeField('title')}
         hintText="Task name"
       /><br />
-      <TextField
+      <DatePicker
         value={taskModal.dueDate}
         onChange={changeField('dueDate')}
         hintText="Due date"
@@ -71,7 +72,11 @@ const mapStateToProps = ({ taskModal, project }) => ({
 const mapDispatchToProps = (dispatch, ownProps) => (
   Object.assign(
     {
-      changeField: field => e => dispatch(changeField(field, e.target.value)),
+      changeField: field => (e, d) => dispatch(
+        // the datepicker passes null for the event
+        // the second arg is the new date. no idea why.
+        changeField(field, e === null ? d : e.target.value)
+      ),
 
       getActionButtons: (taskModal, projectId) => {
         // depending on the modal mode, generate a button to either
