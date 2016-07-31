@@ -16,7 +16,7 @@ const TaskInfo = ({
     <p className="task-title">{task.title}</p>
     <div className="cat-pts-container">
       <p>{task.owner}</p>
-      <button onClick={() => loadTaskIntoModal(task)}>edit</button>
+      <button onClick={() => loadTaskIntoModal(task)}>Edit</button>
     </div>
   </div>
 );

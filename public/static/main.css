@@ -121,7 +121,7 @@ p {
 .category {
   font-weight: 600;
   color: #FFF;
-  background-color: #67809F;
+  background-color: rgb(2, 181, 204);
   border-radius: 50px;
   padding: 4px 15px;
 }
@@ -133,6 +133,7 @@ p {
 }
 
 .cat-pts-container {
+  position: float;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

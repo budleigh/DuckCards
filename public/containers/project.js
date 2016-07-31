@@ -12,9 +12,7 @@ import * as Actions from '../actions'
 
 import '../store/configureStore'
 
-import { bluegrey500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import * as Spacing from 'material-ui/styles/spacing';
 
