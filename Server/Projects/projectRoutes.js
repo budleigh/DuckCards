@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Project = require('./projectModel');
 var User = require('../Users/userModel');
 var jwt = require('jwt-simple');
@@ -46,6 +47,29 @@ module.exports = {
           res.json(updates);
         }
       });
+    });
+  },
+
+  deleteTask: function (req, res) {
+    var projectId = req.params.id;
+    var taskId = req.body._id;
+
+    Project.findById(projectId, function(err, project) {
+      if (err) {
+        res.send(404);
+      } else {
+        var taskIdx = _.findIndex(
+          project.tasks,
+          task => task._id.toString() === taskId
+        );
+
+        if (taskIdx !== -1) {
+          project.tasks.splice(taskIdx, 1);
+        }
+
+        project.save();
+        res.end();
+      }
     });
   },
 
