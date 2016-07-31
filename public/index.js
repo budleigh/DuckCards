@@ -10,6 +10,7 @@ import configureStore from './store/configureStore';
 import { hashHistory, Router, Route } from 'react-router';
 import { signedIn, getToken } from './auth';
 import axios from 'axios';
+import sync from './sync';
 
 // ???
 axios.interceptors.request.use(function (config) {
