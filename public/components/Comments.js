@@ -16,8 +16,8 @@ const Comments = ({ task }) => (
             <ListItem
               secondaryText={
                 <p>
-                  <span style={{color: darkBlack}}>Brendan Lim</span> --
-                  I&apos;ll be in your neighborhood doing errands this weekend. Do you want to grab brunch?
+                  <span style={{color: darkBlack}}>{ comment.user }</span> --
+                  { comment.comment }
                 </p>
               }
               secondaryTextLines={2}
@@ -27,7 +27,7 @@ const Comments = ({ task }) => (
         )
       })}
     </List>
-    <AddComment />
+    <AddComment task={task} />
   </div>
 );
 
