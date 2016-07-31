@@ -3,10 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { each } from 'lodash';
 import { setVisibility, changeField, setMode } from '../actions/taskModal';
+import { openDeleteTaskModal } from '../actions/confirmDeleteTaskModal';
 
 const TaskInfo = ({
   task,
-  loadTaskIntoModal
+  projectId,
+  loadTaskIntoModal,
+  openDeleteTaskModal
 }) => (
   <div>
     <div className="date-status-container">
@@ -17,11 +20,16 @@ const TaskInfo = ({
     <div className="cat-pts-container">
       <p>{task.owner}</p>
       <button onClick={() => loadTaskIntoModal(task)}>Edit</button>
+      <button onClick={() => openDeleteTaskModal(task, projectId)}>
+        Delete
+      </button>
     </div>
   </div>
 );
 
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => ({
+  projectId: state.project.project._id
+});
 
 const mapDispatchToProps = (dispatch) => {
   return Object.assign(
@@ -32,7 +40,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(setVisibility(true));
       }
     },
-    bindActionCreators({ setVisibility }, dispatch)
+    bindActionCreators({ setVisibility, openDeleteTaskModal }, dispatch)
   );
 };
 

@@ -18,6 +18,7 @@ import * as Spacing from 'material-ui/styles/spacing';
 
 import Tasks from '../components/Tasks.js';
 import Navbar from '../components/Navbar.js';
+import ConfirmDeleteTaskModal from '../components/ConfirmDeleteTaskModal';
 
 class Project extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Project extends Component {
         <div>
           <Navbar data={ this.props.data } actions={ this.props.actions } />
           <Tasks data={ this.props.project.tasks } actions={ this.props.actions } />
+          <ConfirmDeleteTaskModal />
         </div>
       </MuiThemeProvider>
     )
