@@ -6,6 +6,8 @@ import ProjectCreator from './ProjectCreator';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import { FlatButton } from 'material-ui';
+import { signout } from '../../auth';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Dashboard extends Component {
     return (
       <MuiThemeProvider>
         <div className="projects">
+          <FlatButton className="logout-button" label="Logout" secondary={true} />
           <List className="project-list">
             {this.props.projects.map((project) => {
               return (<div><ListItem className="project"><Link to={ '/project/' + project._id }>{ project.name }</Link></ListItem><Divider /></div>);
