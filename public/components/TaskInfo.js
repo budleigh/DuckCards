@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { each } from 'lodash';
 import { setVisibility, changeField, setMode } from '../actions/taskModal';
 import { openDeleteTaskModal } from '../actions/confirmDeleteTaskModal';
+import Comments from './Comments';
 
 const TaskInfo = ({
   task,
@@ -24,6 +25,7 @@ const TaskInfo = ({
         Delete
       </button>
     </div>
+    <Comments />
   </div>
 );
 
