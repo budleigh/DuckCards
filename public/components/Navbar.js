@@ -9,6 +9,10 @@ import { setVisibility, setMode } from '../actions/taskModal';
 
 injectTapEventPlugin();
 
+const style = {
+  marginRight: 20
+}
+
 class Nav extends React.Component {
   constructor(props) {
     super(props);
@@ -19,13 +23,13 @@ class Nav extends React.Component {
 
     return (
       <AppBar
-        title="Duck Cards"
+        title={"Falafel.io"}
         className="navBar"
         style={{position: 'fixed'}}
         iconElementRight={
-          <div>
+          <div style={style} >
             <TaskModal />
-            <RaisedButton label="New Task" onTouchTap={openCreateTaskModal} />
+            <RaisedButton label="Add New Task" onTouchTap={openCreateTaskModal} />
           </div>
         }
       />

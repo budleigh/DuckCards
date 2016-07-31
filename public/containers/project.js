@@ -43,12 +43,8 @@ class Project extends Component {
   }
 
   render() {
-    const muiTheme = getMuiTheme({
-      palette: { primary1Color:"blueGrey500" },
-      position: {}
-    });
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider>
         <div>
           <Navbar data={ this.props.data } actions={ this.props.actions } />
           <Tasks data={ this.props.project.tasks } actions={ this.props.actions } />
