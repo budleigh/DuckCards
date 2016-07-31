@@ -1,12 +1,12 @@
-# Duck Cards
+# Falafel.io
 
   Task management app with best practices implementation of React, Redux, Node, MongoDB
 
 ## Team
 
-  - __Product Owner__: Louis Lo
-  - __Scrum Master__: Chase Patterson
-  - __Development Team Members__: Heather Park, Taylor Page
+  - __Product Owner__: Forrest Labrum
+  - __Scrum Master__: Patrick Truong
+  - __Development Team Members__: Sam Wainwright, Nick Fireman
 
 ## Requirements
 
