@@ -1,16 +1,18 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators, compose } from 'redux';
+import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import { render } from 'react-dom';
 import { fetchProject } from '../actions/projects';
 import {
   fetchTasks, receiveTasks,
   fetchTasksIfNeeded, createTask
-} from '../actions'
+} from '../actions';
 
-import * as Actions from '../actions'
+import * as Actions from '../actions';
 
-import '../store/configureStore'
+import '../store/configureStore';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -71,4 +73,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Project)
+export default compose(
+  DragDropContext(HTML5Backend),
+  connect(mapStateToProps, mapDispatchToProps)
+)(Project);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AppBar, RaisedButton, Avatar, FlatButton } from 'material-ui';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TaskModal from './TaskModal';
-import { setVisibility, setMode } from '../actions/taskModal';
+import { setVisibility, setMode, clearAllFields } from '../actions/taskModal';
 
 //this allows an onTouchTap event on some of material-UI's components
 
@@ -40,6 +40,7 @@ class Nav extends React.Component {
 const mapStateToProps = state => state;
 const mapDispatchToProps = (dispatch) => ({
   openCreateTaskModal: () => {
+    dispatch(clearAllFields());
     dispatch(setVisibility(true));
     dispatch(setMode('create'));
   }

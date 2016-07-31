@@ -9,7 +9,7 @@ class Tasks extends React.Component {
 
     return (
       <div className="task-container">
-        <TaskStatusColumn tasks={tasksByStatus['To Do']} columnName="To-Dos" />
+        <TaskStatusColumn tasks={tasksByStatus['To Do']} columnName="To Do" />
         <TaskStatusColumn tasks={tasksByStatus['In Progress']} columnName="In Progress" />
         <TaskStatusColumn tasks={tasksByStatus['Completed']} columnName="Completed" />
       </div>
