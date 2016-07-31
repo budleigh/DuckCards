@@ -56,8 +56,12 @@ export function updateTask(project, task) {
 }
 
 export function deleteTask(project, taskId) {
+  const config = {
+    data: { _id: taskId }
+  };
+
   return dispatch => {
-    return axios.delete('/projects/' + project + '/tasks', { _id: taskId })
+    return axios.delete('/projects/' + project + '/tasks', config)
       .then(response => dispatch(fetchProject(project)))
       .catch(error => console.log(error));
   };
