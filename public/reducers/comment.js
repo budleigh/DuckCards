@@ -4,10 +4,8 @@ const project = (state = {}, action) => {
   switch (action.type) {
     case CHANGE_COMMENT_FIELD:
       return Object.assign({}, state, {
-        comment: {
-          task: action.task,
-          text: action.text
-        }
+        task: action.task,
+        comment: action.text
       });
 
     default:
