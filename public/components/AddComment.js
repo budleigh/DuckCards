@@ -24,16 +24,23 @@ class AddComment extends React.Component {
   }
 
   render() {
+    var commentField;
+
     return (
       <div>
         <TextField
+          ref={field => { commentField = field; }}
           hintText="Add comment"
           multiLine={true}
           rows={2}
           rowsMax={6}
           onChange={this.onCommentChange.bind(this)}
         />
-        <RaisedButton label="Comment" primary={true} onClick={this.commentOnTask.bind(this)} />
+        <RaisedButton label="Comment" primary={true} onClick={(e) => {
+          this.commentOnTask();
+          commentField.input.refs.input.value = '';  // what the hell
+        }}
+        />
       </div>
     );
   }
