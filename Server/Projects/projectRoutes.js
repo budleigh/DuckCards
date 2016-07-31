@@ -99,7 +99,7 @@ module.exports = {
         res.end();
       }
     })
-  }
+  },
 
   createProject: function (req, res) {
     var projectName = req.body.projectName;
