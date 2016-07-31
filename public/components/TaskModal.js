@@ -73,6 +73,8 @@ const mapDispatchToProps = (dispatch, ownProps) => (
   Object.assign(
     {
       changeField: field => (e, d) => dispatch(
+        // the datepicker passes null for the event
+        // the second arg is the new date. no idea why.
         changeField(field, e === null ? d : e.target.value)
       ),
 
