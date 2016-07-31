@@ -10,7 +10,7 @@ const ProjectCreator = ({ onCreate }) => {
       <div>
         <h2>Create project</h2>
           <form>
-            <input ref={node => { input = node; }} type="text" name="name" placeholder="name" />
+            <input ref={node => { input = node; }} type="text" name="name" placeholder="Project Name" className="project-input" />
           </form>
           <RaisedButton onClick={() => {
             onCreate(input.value);

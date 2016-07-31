@@ -78,6 +78,13 @@ p {
   text-align: center;
 }
 
+.project-input {
+  width: 15%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 /* ------------------------------------------------- */
 /* TASK CARD */
 /* ------------------------------------------------- */
@@ -133,7 +140,6 @@ p {
 }
 
 .cat-pts-container {
-  position: float;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
