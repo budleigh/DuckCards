@@ -75,3 +75,16 @@ export function changeCommentField(task, text) {
     task: task
   };
 }
+
+export function postComment(project, task, comment) {
+  return dispatch => {
+    return axios.post('/projects/' + project + '/tasks/comment', {
+      data: {
+        task: task,
+        text: comment
+      }
+    })
+      .then(response => dispatch(fetchProject(project)))
+      .catch(error => console.log(error));
+  };
+}
