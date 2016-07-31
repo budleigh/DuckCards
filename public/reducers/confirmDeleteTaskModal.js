@@ -1,4 +1,7 @@
-import { OPEN_DELETE_TASK_MODAL } from '../actions/confirmDeleteTaskModal';
+import {
+  OPEN_DELETE_TASK_MODAL,
+  CLOSE_DELETE_TASK_MODAL
+} from '../actions/confirmDeleteTaskModal';
 
 const defaultState = {
   open: false,
