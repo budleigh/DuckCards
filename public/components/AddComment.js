@@ -1,12 +1,21 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { changeCommentField } from '../actions';
+import { changeCommentField, postComment } from '../actions';
 import { connect } from 'react-redux';
 
 class AddComment extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  commentOnTask() {
+    let { comment } = this.props;
+    let { project } = this.props;
+    let { dispatch } = this.props;
+    let taskId = comment.task._id;
+    let projectId = project.project._id;
+    dispatch(postComment(projectId, taskId, comment.comment));
   }
 
   onCommentChange(e) {
@@ -24,7 +33,7 @@ class AddComment extends React.Component {
           rowsMax={6}
           onChange={this.onCommentChange.bind(this)}
         />
-        <RaisedButton label="Comment" primary={true} />
+        <RaisedButton label="Comment" primary={true} onClick={this.commentOnTask.bind(this)} />
       </div>
     );
   }
