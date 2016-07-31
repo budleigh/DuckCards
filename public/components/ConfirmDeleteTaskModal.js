@@ -7,7 +7,7 @@ import { closeDeleteTaskModal } from '../actions/confirmDeleteTaskModal';
 
 const ConfirmDeleteTaskModal = ({ modal, deleteTask, closeDeleteTaskModal }) => (
   <Dialog
-    title={`Deleting task: modal.task.title`}
+    title={`Deleting task: ${modal.task.title}`}
     onRequestClose={closeDeleteTaskModal}
     open={modal.open}
   >

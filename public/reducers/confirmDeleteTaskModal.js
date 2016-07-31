@@ -5,7 +5,9 @@ import {
 
 const defaultState = {
   open: false,
-  task: null
+  task: {
+    title: ''
+  }
 };
 
 const confirmDeleteTaskModal = (state = defaultState, action) => {
