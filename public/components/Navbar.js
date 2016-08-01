@@ -8,8 +8,8 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import TaskModal from './TaskModal';
 import { setVisibility, setMode, clearAllFields } from '../actions/taskModal';
+import { setCollabVisibility, clearAllCollabFields } from '../actions/collabModal';
 import { Link } from 'react-router';
 
 //this allows an onTouchTap event on some of material-UI's components
@@ -22,7 +22,7 @@ class Nav extends React.Component {
   }
 
   render() {
-    const { openCreateTaskModal } = this.props;
+    const { openCreateTaskModal, openCollabModal } = this.props;
 
     return (
       <AppBar
@@ -31,7 +31,7 @@ class Nav extends React.Component {
         iconElementLeft={<IconButton containerElement={<Link to="/" />}><ActionHome /></IconButton>}
         iconElementRight={
           <div>
-            <TaskModal />
+            <RaisedButton label="Add Collaborator" onTouchTap={openCollabModal} />
             <IconButton onTouchTap={openCreateTaskModal}><ContentAdd /></IconButton>
           </div>
         }
@@ -43,9 +43,15 @@ class Nav extends React.Component {
 const mapStateToProps = state => state;
 const mapDispatchToProps = (dispatch) => ({
   openCreateTaskModal: () => {
+    console.log('opening create')
     dispatch(clearAllFields());
     dispatch(setVisibility(true));
     dispatch(setMode('create'));
+  },
+  openCollabModal: () => {
+    console.log('opening collab')
+    dispatch(clearAllCollabFields());
+    dispatch(setCollabVisibility(true));
   }
 });
 

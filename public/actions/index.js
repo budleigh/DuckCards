@@ -86,3 +86,10 @@ export function postComment(project, task, comment) {
       .catch(error => console.log(error));
   };
 }
+
+export function addCollab(project, username) {
+  return dispatch => {
+    return axios.post('/projects/' + project + '/user', username)
+      .catch(error => console.log(error))
+  }
+}
