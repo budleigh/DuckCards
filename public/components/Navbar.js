@@ -3,6 +3,7 @@ import { connect, hashHistory } from 'react-redux';
 import { AppBar, RaisedButton, Avatar, FlatButton, IconButton } from 'material-ui';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import SocialPersonAdd from 'material-ui/svg-icons/social/person-add';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
@@ -31,7 +32,7 @@ class Nav extends React.Component {
         iconElementLeft={<IconButton containerElement={<Link to="/" />}><ActionHome /></IconButton>}
         iconElementRight={
           <div>
-            <RaisedButton label="Add Collaborator" onTouchTap={openCollabModal} />
+            <IconButton onTouchTap={openCollabModal}><SocialPersonAdd /></IconButton>
             <IconButton onTouchTap={openCreateTaskModal}><ContentAdd /></IconButton>
           </div>
         }
