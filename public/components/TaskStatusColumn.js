@@ -31,15 +31,27 @@ function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     canDrop: monitor.canDrop(),
+    isOver: monitor.isOver(),
     itemType: monitor.getItemType()
   };
 }
 
-// es6 shorthand for giving corresponding variable names to props
-const TaskStatusColumn = ({tasks = [], columnName, connectDropTarget }) => {
+const TaskStatusColumn = ({
+  tasks = [],
+  columnName,
+  connectDropTarget,
+  canDrop,
+  isOver
+}) => {
+  const isActive = canDrop && isOver;
+
+  const columnTitleClassName = isActive ?
+    'column-title-active' :
+    'column-title';
+
   return connectDropTarget(
     <div className="task-column">
-      <div className="column-title">
+      <div className={columnTitleClassName}>
         <p>{columnName}</p>
       </div>
       {tasks.map((task, index) =>

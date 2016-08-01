@@ -145,6 +145,13 @@ p {
   font-weight: 600;
 }
 
+.column-title-active {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #00bcd4;
+}
+
 .date-status-container {
   width: 100%;
   margin: 0 auto;
