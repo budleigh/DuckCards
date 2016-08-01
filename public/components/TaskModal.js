@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { TextField, MenuItem, Dialog, DropDownMenu, FlatButton } from 'material-ui';
-import { changeStatus, changeField, setVisibility } from '../actions/taskModal';
+import { changeStatus, changeField, setVisibility, changeDate } from '../actions/taskModal';
 import { createTask, updateTask } from '../actions';
 import DatePicker from 'material-ui/DatePicker';
 
@@ -17,6 +17,7 @@ const CreateTaskModal = ({
   getActionButtons,
   changeStatus,
   changeField,
+  changeDate,
   setVisibility,
   createTask
 }) => (
@@ -35,8 +36,8 @@ const CreateTaskModal = ({
         hintText="Task name"
       /><br />
       <DatePicker
-        value={taskModal.dueDate}
-        onChange={changeField('dueDate')}
+        value={taskModal.dueDateObj}
+        onChange={changeDate}
         hintText="Due date"
       /><br />
       <TextField
@@ -73,15 +74,15 @@ const mapDispatchToProps = (dispatch, ownProps) => (
   Object.assign(
     {
       changeField: field => (e, d) => dispatch(
-        // the datepicker passes null for the event
-        // the second arg is the new date. no idea why.
-        changeField(field, e === null ? d : e.target.value)
+        changeField(field, e.target.value)
       ),
+
+      changeDate: (e, d) => dispatch(changeDate(d)),
 
       getActionButtons: (taskModal, projectId) => {
         // depending on the modal mode, generate a button to either
         // create a new task or update an existing task. the same
-        // data will be sent to the server in either case; whatever's
+        // data will be sent to the server in either case: whatever's
         // in the modal input boxes
         const submitTask = taskModal.mode === 'create' ?
           createTask :
