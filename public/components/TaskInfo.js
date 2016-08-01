@@ -20,13 +20,16 @@ const TaskInfo = ({
     <div className="date-status-container">
       <p className="due-date">Due: {task.dueDate}</p>
       <p className="category">{task.category}</p>
+      <IconButton onClick={() => loadTaskIntoModal(task)} tooltip="Edit Task">
+        <EditIcon></EditIcon>
+      </IconButton>
+      <IconButton onClick={() => openDeleteTaskModal(task, projectId)} tooltip="Delete Task">
+        <DeleteIcon></DeleteIcon>
+      </IconButton>
     </div>
     <p className="task-title">{task.title}</p>
     <div className="cat-pts-container">
       <p>{task.owner}</p>
-      <EditIcon onClick={() => loadTaskIntoModal(task)}>Edit</EditIcon>
-      <DeleteIcon onClick={() => openDeleteTaskModal(task, projectId)}>
-      </DeleteIcon>
     </div>
     <Collapsible triggerText="Comments">
       <Comments task={task} />
