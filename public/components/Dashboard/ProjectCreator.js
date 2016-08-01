@@ -8,11 +8,10 @@ const ProjectCreator = ({ onCreate }) => {
   return (
     <MuiThemeProvider>
       <div>
-        <h2>Create project</h2>
           <form>
             <input ref={node => { input = node; }} type="text" name="name" placeholder="Project Name" className="project-input" />
           </form>
-          <RaisedButton onClick={() => {
+          <RaisedButton className="new-project-button" onClick={() => {
             onCreate(input.value);
             input.value = '';
           }}

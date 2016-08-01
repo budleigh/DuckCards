@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { changeAuthField } from '../../actions';
 import { signup } from '../../auth';
@@ -30,8 +30,8 @@ class Signup extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div className="form">
-          <h2>Sign Up</h2>
+        <div className="auth">
+          <h2>Sign Up</h2><Link to="/signin">Sign in</Link>
           <form onSubmit={
             this.postSignup.bind(this)
           }>
@@ -41,15 +41,16 @@ class Signup extends Component {
               floatingLabelText="To Sign Up Enter Your Email"
               value={this.props.username}
               onChange={this.onFieldChange.bind(this)}
-            />
+            /> <br />
             <TextField
               type="password"
               name="password"
               floatingLabelText="Enter Your New Password"
               value={this.props.password}
               onChange={this.onFieldChange.bind(this)}
-            />
+            /> <br />
             <RaisedButton
+              className="auth-button"
               type="submit"
               value="sign up"
               primary={true}
