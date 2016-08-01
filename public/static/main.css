@@ -167,6 +167,7 @@ p {
   font-size: 16px;
   font-weight: 600;
   margin: 20px 0;
+  text-align: center;
 }
 
 .cat-pts-container {
@@ -189,10 +190,26 @@ p {
   color: #67809F;
 }
 
-.navBar{
+.navBar {
  width: 100%;
 }
 
- .form{
+.form {
   text-align: center;
- }
+}
+
+.delete-icon {
+  right: -10px;
+}
+
+.edit-icon {
+  right: -40px;
+}
+
+.task-bottom {
+  display: inline-block;
+}
+
+.task-owner {
+  float: right;
+}
