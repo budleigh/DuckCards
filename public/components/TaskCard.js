@@ -20,9 +20,14 @@ const collect = (connect, monitor) => {
 
 class TaskCard extends React.Component {
   render() {
-    const { task, connectDragSource } = this.props;
+    const { task, connectDragSource, isDragging } = this.props;
+
+    const className = isDragging ?
+      'task-card-container-dragging' :
+      'task-card-container';
+
     return connectDragSource(
-      <div className="task-card-container">
+      <div className={className}>
         <TaskInfo task={task} />
       </div>
     );
