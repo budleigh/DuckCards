@@ -32,7 +32,7 @@ class Dashboard extends Component {
     return (
       <MuiThemeProvider>
         <div className="projects">
-          <FlatButton className="logout-button" label="Logout" secondary={true} onClick={this.signOut.bind(this)} />
+          <FlatButton className="auth-button" label="Logout" secondary={true} onClick={this.signOut.bind(this)} />
           <List className="project-list">
             {this.props.projects.map((project) => {
               return (<div><ListItem className="project"><Link to={ '/project/' + project._id }>{ project.name }</Link></ListItem><Divider /></div>);
