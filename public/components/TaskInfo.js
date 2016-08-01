@@ -6,6 +6,9 @@ import { setVisibility, changeField, setMode } from '../actions/taskModal';
 import { openDeleteTaskModal } from '../actions/confirmDeleteTaskModal';
 import Comments from './Comments';
 import Collapsible from 'react-collapsible';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
 const TaskInfo = ({
   task,
@@ -21,10 +24,9 @@ const TaskInfo = ({
     <p className="task-title">{task.title}</p>
     <div className="cat-pts-container">
       <p>{task.owner}</p>
-      <button onClick={() => loadTaskIntoModal(task)}>Edit</button>
-      <button onClick={() => openDeleteTaskModal(task, projectId)}>
-        Delete
-      </button>
+      <EditIcon onClick={() => loadTaskIntoModal(task)}>Edit</EditIcon>
+      <DeleteIcon onClick={() => openDeleteTaskModal(task, projectId)}>
+      </DeleteIcon>
     </div>
     <Collapsible triggerText="Comments">
       <Comments task={task} />
