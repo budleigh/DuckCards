@@ -3,17 +3,23 @@ import {
   CHANGE_FIELD,
   SET_MODE,
   SET_VISIBILITY,
-  CLEAR_ALL_FIELDS
+  CLEAR_ALL_FIELDS,
+  CHANGE_DATE
 } from '../actions/taskModal';
 
 const defaultState = {
+  // internal component state properties
   mode: 'create',
   open: false,
+  dropdownValue: 1,
+  dateDateObj: null,
+
+  // document propreties
+  // in retrospect, these two groups should not be in the same object
   title: '',
   dueDate: '',
   category: '',
   owner: '',
-  dropdownValue: 1,
   status: "To Do"
 };
 
@@ -22,6 +28,10 @@ const statusValueMap = {
   2: 'In Progress',
   3: 'Completed'
 };
+
+const getDateString = (date) => (
+  `${date.getMonth()}/${date.getDay()}`
+);
 
 const taskModal = (state = defaultState, action) => {
   switch (action.type) {
@@ -48,6 +58,12 @@ const taskModal = (state = defaultState, action) => {
 
     case CLEAR_ALL_FIELDS:
       return defaultState;
+
+    case CHANGE_DATE:
+      return Object.assign({}, state, {
+        dueDate: getDateString(action.value),
+        dueDateObj: action.value
+      });
 
     default:
       return state;

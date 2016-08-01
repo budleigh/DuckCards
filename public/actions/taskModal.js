@@ -1,4 +1,5 @@
 export const CHANGE_FIELD = 'CHANGE_FIELD';
+export const CHANGE_DATE = 'CHANGE_DATE';
 export const CLEAR_ALL_FIELDS = 'CLEAR_ALL_FIELDS';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const SET_MODE = 'SET_MODE';
@@ -22,6 +23,13 @@ export function changeField (field, value) {
   return {
     type: CHANGE_FIELD,
     field,
+    value
+  };
+}
+
+export function changeDate (value) {
+  return {
+    type: CHANGE_DATE,
     value
   };
 }
