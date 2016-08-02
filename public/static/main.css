@@ -46,6 +46,7 @@ body {
 
 .task-column {
   width: 33%;
+  height: 75vh;
 }
 
 .column-title {
